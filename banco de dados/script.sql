@@ -19,6 +19,11 @@ create table Perfil (
         references Estilo(idEstilo)
 );
 
+insert into perfil values 
+(default, 'KEvelly', 'aaaaaa', 'bbbbbbbbbbbbbbbbbbbbbbbbb', null);	
+
+
+
 create table Usuario (
     idUsuario int primary key auto_increment,
     nome varchar(26) not null,
@@ -74,3 +79,13 @@ create table Classificacao (
         references Interacao(fkUsuario, fkPostagem),
     index idx_fkInteracaoClassificacao (fkUsuario, fkPostagem)
 );
+
+-- selects de perfil 
+SELECT * FROM perfil WHERE idPerfil = 1;
+
+SELECT * from interacao
+	join postagem as p
+		on fkPostagem = idPostagem
+	join usuario as u
+		on fkUsuario = idUsuario
+	where fkPostagem = 1 and fkUsuario = 2;
