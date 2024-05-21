@@ -26,7 +26,7 @@ function autenticar(req, res) {
                             .then((resultadoAquarios) => {
                                 if (resultadoAquarios.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].idUsuario,
+                                        idUsuario: resultadoAutenticar[0].idUsuario,
                                         dtNasc: resultadoAutenticar[0].dtNasc,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,

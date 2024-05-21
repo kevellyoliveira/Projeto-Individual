@@ -118,18 +118,26 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
+        var titulo = form_postagem.titulo.value;
+        var descricao = form_postagem.descricao.value;
 
-        var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
-        }
+        // var corpo = {
+        //     titulo: form_postagem.titulo.value,
+        //     descricao: form_postagem.descricao.value
+        // }
 
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(corpo)
+            body: JSON.stringify({
+
+                tituloServer: titulo,
+                descricaoServer: descricao,
+                idUsuarioServer: idUsuario
+
+            })
         }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
@@ -139,7 +147,7 @@
                 window.alert("Post realizado com sucesso!");
                 window.location = "/dashboard/mural.html";
                 limparFormulario();
-                finalizarAguardar();
+                // finalizarAguardar();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -147,24 +155,25 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            // finalizarAguardar();
         });
 
         return false;
 
     }
 
-    function editar(idUsuario) {
-        sessionStorage.ID_USUARIO = idUsuario;
-        console.log("cliquei em editar - " + idUsuario);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idUsuario);
+    function editar(idPostagem) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idPostagem;
+        console.log("cliquei em editar - " + idPostagem);
+        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPostagem);
         window.location = "/dashboard/edicao-aviso.html"
 
     }
 
-    function deletar(idUsuario) {
-        console.log("Criar função de apagar post escolhido - ID" + idUsuario);
-        fetch(`/avisos/deletar/${idUsuario}`, {
+    function deletar(idPostagem) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idPostagem;
+        console.log("Criar função de apagar post escolhido - ID" + idPostagem);
+        fetch(`/avisos/deletar/${idPostagem}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -222,7 +231,7 @@
                         btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idPostagem;
+                        spanTitulo.idPostagem = "inputNumero" + publicacao.idPostagem;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
@@ -230,11 +239,11 @@
                         divButtons.className = "div-buttons"
 
                         btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idPostagem;
+                        btnEditar.idPostagem = "btnEditar" + publicacao.idPostagem;
                         btnEditar.setAttribute("onclick", `editar(${publicacao.idPostagem})`);
 
                         btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idPostagem;
+                        btnDeletar.idPostagem = "btnDeletar" + publicacao.idPostagem;
                         btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPostagem})`);
 
                         // divPublicacao.appendChild(spanID);
@@ -247,14 +256,14 @@
                         feed.appendChild(divPublicacao);
                     }
 
-                    finalizarAguardar();
+                    // finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            finalizarAguardar();
+            // finalizarAguardar();
         });
     }
 

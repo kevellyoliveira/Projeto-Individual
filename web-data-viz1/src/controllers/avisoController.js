@@ -1,3 +1,4 @@
+const { configDotenv } = require("dotenv");
 var avisoModel = require("../models/avisoModel");
 
 function listar(req, res) {
@@ -61,9 +62,11 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var usuarioID = sessionStorage.ID_USUARIO;
+    var titulo = req.body.tituloServer;
+    var descricao = req.body.descricaoServer;
+    var idUsuario = req.body.idUsuarioServer;
+    
+    console.log(`ID do projeto: ${idUsuario}`)
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
@@ -77,7 +80,7 @@ function publicar(req, res) {
                 function (resultado) {
                     res.json(resultado);
                     var idPostagem = resultado.insertId;
-                    avisoModel.cadastrarInteracao(usuarioID, idPostagem);
+                    avisoModel.cadastrarInteracao(idUsuario, idPostagem);
                 }
             )
             .catch(
@@ -97,6 +100,9 @@ function editar(req, res) {
     var novoTitulo = req.body.titulo;
     var idPostagem = req.params.idPostagem;
 
+    console.log(`ID da postagem: ${idPostagem}`)
+
+
     avisoModel.editar(novaDescricao, novoTitulo, idPostagem)
         .then(
             function (resultado) {
@@ -114,12 +120,15 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idPostagem = req.params.idPostagem;
+    var idUsuario = req.body.idUsuarioServer;
 
-    avisoModel.deletar(idPostagem)
+    avisoModel.deletar(idUsuario)
         .then(
             function (resultado) {
                 res.json(resultado);
+                var idPostagem = resultado.insertId;
+                avisoModel.deletarInteracao(idUsuario, idPostagem);
+
             }
         )
         .catch(

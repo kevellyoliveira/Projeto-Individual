@@ -114,6 +114,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                titulo: input_titulo.value,
                 descricao: textarea_descricao.value
             })
         }).then(function (resposta) {
