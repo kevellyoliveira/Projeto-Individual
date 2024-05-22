@@ -119,26 +119,42 @@ function editar(req, res) {
 
 }
 
-function deletar(req, res) {
-    var idUsuario = req.body.idUsuarioServer;
+function deletarInteracao(req, res, idUsuario, idPostagem) {
+    console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
 
-    avisoModel.deletar(idUsuario)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-                var idPostagem = resultado.insertId;
-                avisoModel.deletarInteracao(idUsuario, idPostagem);
-
+    avisoModel.deletarInteracao(idUsuario, idPostagem)
+        .then(function(resultado) 
+        {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json({ message: "Interação deletada com sucesso" });
+            } else {
+                res.status(404).json({ message: "Interação não encontrada" });
             }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        }).catch(function(erro) {
+            console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
+
+// function deletarInteracao(req, res) {
+//     var idUsuario = req.body.idUsuarioServer;
+//     var idPostagem = req.params.idPostagem;
+
+//     console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
+
+//     avisoModel.deletarInteracao(idUsuario, idPostagem)
+//         .then(function(resultado) {
+//             if (resultado.affectedRows > 0) {
+//                 res.status(200).json({ message: "Interação deletada com sucesso" });
+//             } else {
+//                 res.status(404).json({ message: "Interação não encontrada" });
+//             }
+//         }).catch(function(erro) {
+//             console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
+//             res.status(500).json(erro.sqlMessage);
+//         });
+// }
+
 
 module.exports = {
     listar,
@@ -146,5 +162,5 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletarInteracao
 }

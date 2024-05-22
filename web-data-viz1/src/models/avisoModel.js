@@ -36,14 +36,14 @@ function cadastrarInteracao(fkUsuario, fkPostagem) {
     return database.executar(instrucaoSql);
 }
 
-function listarPorUsuario(titulo, descricao, foto) {
+function listarPorUsuario() {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
     var instrucaoSql = `
     SELECT (titulo, descricao, foto) FROM postagem;
         `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
-}
+}   
 
 function publicar(titulo, descricao, foto) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, foto);
@@ -63,17 +63,17 @@ function editar(novaDescricao, novoTitulo, idPostagem) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function deletar(fkUsuario, fkPostagem) {
+function deletarInteracao(fkUsuario, idPostagem) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idPostagem);
     var instrucaoSql = `
-    DELETE FROM interacao WHERE fkUsuario = '${fkUsuario}' AND fkPostagem = '${fkPostagem}';
+    DELETE FROM interacao WHERE fkUsuario = '${fkUsuario}' AND fkPostagem = '${idPostagem}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function deletarInteracao(idPostagem) {
-    console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idPostagem);
+function deletarPostagem(idPostagem) {
+    console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", fkUsuario, fkPostagem);
     var instrucaoSql = `
     DELETE FROM postagem WHERE idPostagem = ${idPostagem};
     `;
@@ -88,6 +88,6 @@ module.exports = {
     cadastrarInteracao,
     publicar,
     editar,
-    deletar,
+    deletarPostagem,
     deletarInteracao
 }

@@ -188,9 +188,10 @@ body {
 
 .cards {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
-  height: 450px;
+  flex-direction: column;
+  height: 700px;
   width: 100%;
   align-items: center;
   color: white;
@@ -205,6 +206,7 @@ body {
   display: flex;
   /* text-align: center; */
   height: 180px;
+  /* flex-direction: column; */
   /* justify-content: right; */
   background-color: #212124;
   font-size: 20px;

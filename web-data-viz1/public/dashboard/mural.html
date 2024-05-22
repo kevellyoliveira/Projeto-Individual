@@ -107,7 +107,7 @@
 </html>
 
 <script>
-    
+
     // b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     // b_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
@@ -116,7 +116,7 @@
         document.getElementById("form_postagem").reset();
     }
 
-    function publicar() {
+    function publicar(idUsuarioServer) {
         var idUsuario = sessionStorage.ID_USUARIO;
         var titulo = form_postagem.titulo.value;
         var descricao = form_postagem.descricao.value;
@@ -147,7 +147,7 @@
                 window.alert("Post realizado com sucesso!");
                 window.location = "/dashboard/mural.html";
                 limparFormulario();
-                // finalizarAguardar();
+                finalizarAguardar();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -155,7 +155,7 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
+            finalizarAguardar();
         });
 
         return false;
@@ -170,15 +170,20 @@
 
     }
 
-    function deletar(idPostagem) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idPostagem;
+    function deletar(idUsuarioServer, idPostagem) {
+        var idUsuario = sessionStorage.ID_USUARIO ;
+        // var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
         console.log("Criar função de apagar post escolhido - ID" + idPostagem);
-        fetch(`/avisos/deletar/${idPostagem}`, {
+
+        fetch(`/avisos/deletar/${idUsuario}/${idPostagem}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
-            }
-        }).then(function (resposta) {
+            },
+            body: JSON.stringify({
+                idUsuarioServer: idUsuario
+            })
+        }) .then(function (resposta) {
 
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
@@ -242,9 +247,15 @@
                         btnEditar.idPostagem = "btnEditar" + publicacao.idPostagem;
                         btnEditar.setAttribute("onclick", `editar(${publicacao.idPostagem})`);
 
-                        btnDeletar.className = "publicacao-btn-editar"
+                        // btnDeletar.className = "publicacao-btn-editar"
+                        // btnDeletar.idPostagem = "btnDeletar" + publicacao.idPostagem;
+                        // btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPostagem})`);
+
+                        btnDeletar.className = "publicacao-btn-editar";
                         btnDeletar.idPostagem = "btnDeletar" + publicacao.idPostagem;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPostagem})`);
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idUsuario}, ${publicacao.idPostagem})`);
+                        btnDeletar.innerHTML = "Deletar";
+
 
                         // divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);

@@ -27,8 +27,14 @@ router.put("/editar/:idPostagem", function (req, res) {
     avisoController.editar(req, res);
 });
 
-router.delete("/deletar/:idAviso", function (req, res) {
-    avisoController.deletar(req, res);
+router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
+    var idUsuario = req.params.idUsuario;
+    var idPostagem = req.params.idPostagem;
+    avisoController.deletarInteracao(req, res, idUsuario, idPostagem);
 });
+
+// router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
+//     avisoController.deletarInteracao(idUsuario, idPostagem);
+// });
 
 module.exports = router;
