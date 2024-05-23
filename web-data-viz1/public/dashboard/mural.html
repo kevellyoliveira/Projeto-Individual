@@ -72,13 +72,16 @@
                             </label>
                             <br>
                             <br>
-                            <!-- <label>
+                            <label>
                                 Foto:
                                 <br>
-                                <input name="nome" id="nome" maxlength="100" type="text">
+                                <input name="foto" id="foto" maxlength="100" type="file" onchange="converterImagem()">
+
+                                    <div id="apresentar-imagem"></div>
+                                <!-- <img src=""> -->
                             </label>
                             <br>
-                            <br> -->
+                            <br>
                             <label>
                                 Descrição (máximo de 250 caracteres):
                                 <br>
@@ -110,6 +113,45 @@
 
     // b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     // b_cpf.innerHTML = sessionStorage.CPF_USUARIO;
+
+    // funcao para converter imagem para base64
+    function converterImagem() {
+        var receberArquivo = document.getElementById("foto").files;
+        console.log(receberArquivo);
+
+        //   verificar se existe arquivo
+        if (receberArquivo.length > 0) {
+            // carregar img
+            var carregarImg = receberArquivo[0];
+            console.log(carregarImg);
+
+            //FileReader - permite  ler o conteudo do arquivo no computador do usuario
+            var lerArquivo = new FileReader();
+
+            // o evento onload  ocorre quando  um objeto recarrega
+            lerArquivo.onload = function (arquivoCarregado) {
+                //converter arquivo para base64
+               var imgBase64 = arquivoCarregado.target.result;
+               console.log(imgBase64);
+            
+               // ******* INICIO ENVIAR IMAGEM PARA O HTML ************ /
+               //criar elemento HTML
+              var novaImg = document.createElement('img');
+
+              //Atribuir a imagem para o atributo src
+              novaImg.src = imgBase64;
+
+                // Enviar imagem para o HTML
+                document.getElementById("apresentar-imagem").innerHTML = novaImg.outerHTML;
+
+               // ***** FIM ENVIAR IMG PARA O HTML ******* /
+
+            } 
+            // o metodo readAsDataURL e usado para ler o conteudo
+            lerArquivo.readAsDataURL(carregarImg);
+
+        } 
+    }
 
 
     function limparFormulario() {
@@ -171,7 +213,7 @@
     }
 
     function deletar(idUsuarioServer, idPostagem) {
-        var idUsuario = sessionStorage.ID_USUARIO ;
+        var idUsuario = sessionStorage.ID_USUARIO;
         // var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
         console.log("Criar função de apagar post escolhido - ID" + idPostagem);
 
@@ -183,7 +225,35 @@
             body: JSON.stringify({
                 idUsuarioServer: idUsuario
             })
-        }) .then(function (resposta) {
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function deletar(idUsuarioServer, idPostagem) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        // var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
+        console.log("Criar função de apagar post escolhido - ID" + idPostagem);
+
+        fetch(`/avisos/deletar/${idUsuario}/${idPostagem}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuarioServer: idUsuario
+            })
+        }).then(function (resposta) {
 
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");

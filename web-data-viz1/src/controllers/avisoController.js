@@ -64,6 +64,7 @@ function pesquisarDescricao(req, res) {
 function publicar(req, res) {
     var titulo = req.body.tituloServer;
     var descricao = req.body.descricaoServer;
+    var imagemBase64 = req.body.imagemBase64; // Corrigido para pegar a imagemBase64
     var idUsuario = req.body.idUsuarioServer;
     
     console.log(`ID do projeto: ${idUsuario}`)
@@ -72,10 +73,12 @@ function publicar(req, res) {
         res.status(400).send("O título está indefinido!");
     } else if (descricao == undefined) {
         res.status(400).send("A descrição está indefinido!");
-    } else if (idUsuario == undefined) {
+    }  else if (imagemBase64 == undefined) {
+        res.status(403).send("O id do usuário está indefinido!");
+    }else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+        avisoModel.publicar(titulo, descricao, imagemBase64, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -119,12 +122,14 @@ function editar(req, res) {
 
 }
 
-function deletarInteracao(req, res, idUsuario, idPostagem) {
+function deletarInteracao(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var idPostagem = req.params.idPostagem;
+
     console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
 
     avisoModel.deletarInteracao(idUsuario, idPostagem)
-        .then(function(resultado) 
-        {
+        .then(function(resultado) {
             if (resultado.affectedRows > 0) {
                 res.status(200).json({ message: "Interação deletada com sucesso" });
             } else {
@@ -135,25 +140,6 @@ function deletarInteracao(req, res, idUsuario, idPostagem) {
             res.status(500).json(erro.sqlMessage);
         });
 }
-
-// function deletarInteracao(req, res) {
-//     var idUsuario = req.body.idUsuarioServer;
-//     var idPostagem = req.params.idPostagem;
-
-//     console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
-
-//     avisoModel.deletarInteracao(idUsuario, idPostagem)
-//         .then(function(resultado) {
-//             if (resultado.affectedRows > 0) {
-//                 res.status(200).json({ message: "Interação deletada com sucesso" });
-//             } else {
-//                 res.status(404).json({ message: "Interação não encontrada" });
-//             }
-//         }).catch(function(erro) {
-//             console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
-//             res.status(500).json(erro.sqlMessage);
-//         });
-// }
 
 
 module.exports = {

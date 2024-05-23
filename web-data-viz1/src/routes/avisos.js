@@ -33,6 +33,8 @@ router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
     avisoController.deletarInteracao(req, res, idUsuario, idPostagem);
 });
 
+
+
 // router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
 //     avisoController.deletarInteracao(idUsuario, idPostagem);
 // });
