@@ -66,16 +66,16 @@ function publicar(req, res) {
     var descricao = req.body.descricaoServer;
     var imagemBase64 = req.body.imagemBase64; // Corrigido para pegar a imagemBase64
     var idUsuario = req.body.idUsuarioServer;
-    
+
     console.log(`ID do projeto: ${idUsuario}`)
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
     } else if (descricao == undefined) {
         res.status(400).send("A descrição está indefinido!");
-    }  else if (imagemBase64 == undefined) {
+    } else if (imagemBase64 == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
-    }else if (idUsuario == undefined) {
+    } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
         avisoModel.publicar(titulo, descricao, imagemBase64, idUsuario)
@@ -135,7 +135,8 @@ function deletarInteracao(req, res) {
             } else {
                 res.status(404).json({ message: "Interação não encontrada" });
             }
-        }).catch(function(erro) {
+        })
+        .catch(function (erro) {
             console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         });

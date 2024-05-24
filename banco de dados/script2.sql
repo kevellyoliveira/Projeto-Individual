@@ -9,38 +9,26 @@ create table Estilo (
     foto varchar(120) not null
 );
 
+
 create table Usuario (
     idUsuario int primary key auto_increment,
     nome varchar(26) not null,
     dtNasc date not null,
     email varchar(120) not null,
     senha varchar(20) not null,
-    dtCadastro timestamp not null default current_timestamp,
-     fkEstilo int,
+    dtCadastro timestamp not null default current_timestamp, 
+	    fkEstilo int,
     constraint fkEstiloUsuario foreign key (fkEStilo) 
         references Estilo(idEstilo)
 );
 
+
 create table Postagem (
     idPostagem int primary key auto_increment,
-    titulo varchar(45) not null, 
+    nome varchar(45) not null, 
     descricao varchar(45) not null,
-    foto varchar(700) not null
+    foto varchar(120) not null
 );
-
-create table Perfil (
-    idPerfil int auto_increment primary key,
-    foto varchar(120),
-    descricao varchar(250),
-	fkUsuario int,
-    constraint fkUsuarioPerfil foreign key (fkUsuario) 
-        references Usuario(idUsuario)
-);
-
- -- insert into perfil values 
- -- (default, 'KEvelly', 'aaaaaa', 'bbbbbbbbbbbbbbbbbbbbbbbbb', null);	
-
--- alter table postagem rename column titlulo to titulo;
 
 create table Interacao (
     fkUsuario int,
@@ -80,7 +68,7 @@ create table Classificacao (
 );
 
 -- selects de perfil 
-SELECT * FROM perfil WHERE idPerfil = 1;
+-- SELECT * FROM perfil WHERE idPerfil = 1;
 
 SELECT * from interacao
 	join postagem as p

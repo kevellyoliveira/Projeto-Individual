@@ -155,15 +155,15 @@
       return false;
     }
 
-    // if (dtNascVar.length == 0) {
-    // } else {
-    //   cardErro.style.display = "block";
-    //   mensagem_erro.innerHTML =
-    //     "(A quantidade de caracteres da data de nascimento é invalido)";
+    if (dtNascVar.length == 8) {
+    } else {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A quantidade de caracteres da data de nascimento é invalido)";
 
-    //   finalizarAguardar();
-    //   return false;
-    // }
+      finalizarAguardar();
+      return false;
+    }
 
 
     if (senhaVar == confirmacaoSenhaVar) {

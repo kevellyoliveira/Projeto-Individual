@@ -43,7 +43,7 @@ function listarPorUsuario() {
         `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
-}   
+}
 
 function publicar(titulo, descricao, foto) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, foto);
@@ -63,23 +63,25 @@ function editar(novaDescricao, novoTitulo, idPostagem) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
 function deletarInteracao(fkUsuario, idPostagem) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idPostagem);
     var instrucaoSql = `
     DELETE FROM interacao WHERE fkUsuario = '${fkUsuario}' AND fkPostagem = '${idPostagem}';
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
 
-function deletarPostagem(idPostagem) {
-    console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", fkUsuario, fkPostagem);
-    var instrucaoSql = `
+    var instrucaoDeletarPostagem = `
     DELETE FROM postagem WHERE idPostagem = ${idPostagem};
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    
+    console.log("Executando as instruções SQL para deletar interações e postagem: \n" + instrucaoDeletarInteracoes + "\n" + instrucaoDeletarPostagem);
+    return database.executar(instrucaoSql)
+    .then(() => {
+        // Após deletar as interações, deleta a postagem
+        return database.executar(instrucaoDeletarPostagem);
+    });
 }
+
 
 module.exports = {
     listar,
@@ -88,6 +90,5 @@ module.exports = {
     cadastrarInteracao,
     publicar,
     editar,
-    deletarPostagem,
     deletarInteracao
 }

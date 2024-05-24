@@ -82,10 +82,12 @@ function cadastrar(req, res) {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, dtNasc, email, senha, empresaId)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
+        .then(
+            function (resultado) {
+                res.json(resultado);
+                // var idPostagem = resultado.insertId;
+                // avisoModel.cadastrarPerfil(idUsuario);
+            }
             ).catch(
                 function (erro) {
                     console.log(erro);
