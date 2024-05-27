@@ -20,6 +20,7 @@ router.get("/pesquisar/:descricao", function (req, res) {
 });
 
 router.post("/publicar/:idUsuario", function (req, res) {
+    // var idUsuario = req.params.idUsuario;
     avisoController.publicar(req, res);
 });
 
@@ -32,8 +33,6 @@ router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
     var idPostagem = req.params.idPostagem;
     avisoController.deletarInteracao(req, res, idUsuario, idPostagem);
 });
-
-
 
 // router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
 //     avisoController.deletarInteracao(idUsuario, idPostagem);

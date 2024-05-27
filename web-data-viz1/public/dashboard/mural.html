@@ -158,15 +158,12 @@
         document.getElementById("form_postagem").reset();
     }
 
-    function publicar(idUsuarioServer) {
+    function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
         var titulo = form_postagem.titulo.value;
         var descricao = form_postagem.descricao.value;
 
-        // var corpo = {
-        //     titulo: form_postagem.titulo.value,
-        //     descricao: form_postagem.descricao.value
-        // }
+        console.log("Sessão válida. Usuário ID: " + sessionStorage.ID_USUARIO);
 
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",

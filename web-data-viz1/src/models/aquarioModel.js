@@ -2,10 +2,10 @@ var database = require("../database/config");
 
 function buscarAquariosPorEmpresa() {
   var instrucaoSql = `
-  select u.nome, u.email, p.titulo, p.foto, p.descricao from interacao
-	join usuario as u
+  select nome, email, u.foto, titulo, p.foto, p.descricao from comentario as c
+	join Usuario as u
 		on fkUsuario = idUsuario
-	join postagem as p
+	join Postagem as p
 		on fkPostagem = idPostagem;
     `;
 
@@ -13,9 +13,9 @@ function buscarAquariosPorEmpresa() {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(idPerfil, apelido, foto, descricao, fkEstilo) {
+function cadastrar(idPerfil, apelido, foto, descricao) {
   
-  var instrucaoSql = `INSERT INTO (idPerfil, apelido, foto, descricao, fkEstilo) perfil VALUES (${idPerfil}, ${apelido}, ${foto}, ${descricao}, ${fkEstilo})`;
+  var instrucaoSql = `INSERT INTO (idPerfil, apelido, foto, descricao) perfil VALUES (${idPerfil}, ${apelido}, ${foto}, ${descricao}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

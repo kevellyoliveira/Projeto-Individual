@@ -21,23 +21,23 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idPerfil)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
+                        //      .buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                        //     .then((resultadoAquarios) => {
+                        //         if (resultadoAquarios.length > 0) {
                                     res.json({
                                         idUsuario: resultadoAutenticar[0].idUsuario,
                                         dtNasc: resultadoAutenticar[0].dtNasc,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
-                                        Estilo: resultadoAutenticar[0].fkEstilo,
-                                        aquarios: resultadoAquarios
+                                        senha: resultadoAutenticar[0].senha,
+                                        // Estilo: resultadoAutenticar[0].fkEstilo,
+                                        // aquarios: resultadoAquarios
 
                                     });
-                                } else {
-                                    res.status(204).json({ aquarios: [] });
-                                }
-                            })
+                                // } else {
+                                //     res.status(204).json({ aquarios: [] });
+                                // }
+                            // })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -67,7 +67,7 @@ function cadastrar(req, res) {
     // Faça as validações dos valores
     if (nome == undefined && nome.length > 1) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (dtNasc == undefined && dtNasc.length == 8) {
+    } else if (dtNasc == undefined && dtNasc.length != 8) {
         res.status(400).send("Seu dtNasc está undefined!");
     } else if (email == undefined && (email == termina_com_com && email == indice_arroba)) {
         res.status(400).send("Seu email está undefined!");
