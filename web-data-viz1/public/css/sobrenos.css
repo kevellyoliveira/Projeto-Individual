@@ -17,7 +17,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 4px solid #4d044a;
+  border-bottom: 4px solid #093f15;
 }
 
 .header .container {
@@ -169,7 +169,7 @@ body {
 
 /* FOOTER  */
 .footer {
-  background-color: #4d044a;
+  background-color: #093f15;
   height: 150px;
   color: #fff;
   display: flex;
@@ -248,7 +248,7 @@ body {
 
 .box-text p {
   text-align: center;
-  width: 80%;
+  width: 70%;
   font-size: larger;
   color: #fff;
   padding-top: 10px;
@@ -259,7 +259,7 @@ body {
 .box-text p:hover,
 .box-text p:focus {
   text-align: center;
-  width: 80%;
+  width: 70%;
   font-size: larger;
   color: #fff;
   padding-top: 10px;

@@ -217,3 +217,20 @@ body {
 #div_erros_login {
   display: none
 }
+
+input[type="file"] {
+  display: none;
+}
+
+#foto {
+  border: 2px solid #e3b062;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0;
+  height: 25px;
+  background-color: #fff;
+  font-size: small;
+  padding-top: 5px;
+  /* transition: transform 1s;
+  transform: translateX(0) scale(1.0); */
+}

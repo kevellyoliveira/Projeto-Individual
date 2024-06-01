@@ -3,28 +3,31 @@ var router = express.Router();
 
 var avisoController = require("../controllers/avisoController");
 
-router.get("/listar", function (req, res) {
+// Importando o multer configurado
+var upload = require('../config/configUpload');
+
+router.get("/listar", upload.single('foto'), (req, res) => {
     avisoController.listar(req, res);
 });
 
-router.get("/publicarExibir", function (req, res) {
+router.get("/publicarExibir", upload.single('foto'), (req, res) => {
     avisoController.publicarExibir(req, res);
 });
 
-router.get("/listar/:idUsuario", function (req, res) {
+router.get("/listar/:idUsuario", upload.single('foto'), (req, res) => {
     avisoController.listarPorUsuario(req, res);
 });
 
-router.get("/pesquisar/:descricao", function (req, res) {
+router.get("/pesquisar/:descricao", upload.single('foto'), (req, res) => {
     avisoController.pesquisarDescricao(req, res);
 });
 
-router.post("/publicar/:idUsuario", function (req, res) {
-    // var idUsuario = req.params.idUsuario;
+router.post("/publicar/:idUsuario", upload.single('foto'), (req, res) => {
+    // var idUsuario = req.body.idUsuario;
     avisoController.publicar(req, res);
 });
 
-router.put("/editar/:idPostagem", function (req, res) {
+router.put("/editar/:idPostagem", upload.single('foto'), (req, res) => {
     avisoController.editar(req, res);
 });
 

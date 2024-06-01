@@ -3,7 +3,11 @@ var database = require("../database/config");
 function listar() {
     console.log("ACESSEI O postagem  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
-   select * from postagem;
+    select nome, email, u.foto, titulo, p.foto, p.descricao, c.qtd_curtida from Curtida as c
+	join Usuario as u
+		on fkUsuario = idUsuario
+	join Postagem as p
+		on fkPostagem = idPostagem;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -12,11 +16,11 @@ function listar() {
 function pesquisarDescricao(texto) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
     var instrucaoSql = `
-    select u.nome, u.email, p.foto, p.titulo, p.descricao from interacao
-	join usuario as u
-		on fkUsuario = u.idUsuario
-	join postagem as p
-		on fkPostagem = idPostagem
+    select nome, email, u.foto, titulo, p.foto, p.descricao, c.qtd_curtida from Curtida as c
+	join Usuario as u
+		on fkUsuario = idUsuario
+	join Postagem as p
+		on fkPostagem = idPostagem;
         WHERE p.descricao LIKE '${texto}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -26,7 +30,7 @@ function pesquisarDescricao(texto) {
 function cadastrarInteracao(fkUsuario, fkPostagem) {
     console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
     var instrucaoSql = `
-   INSERT INTO interacao (fkUsuario, fkPostagem) VALUES ('${fkUsuario}', '${fkPostagem}');
+   INSERT INTO curtida (fkUsuario, fkPostagem) VALUES ('${fkUsuario}', '${fkPostagem}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

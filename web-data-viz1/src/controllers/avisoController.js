@@ -1,4 +1,3 @@
-const { configDotenv } = require("dotenv");
 var avisoModel = require("../models/avisoModel");
 
 function listar(req, res) {
@@ -62,29 +61,36 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.tituloServer;
-    var descricao = req.body.descricaoServer;
-    var idUsuario = req.body.idUsuarioServer;
-    // var idUsuario = req.params.idUsuario;
+    // var idUsuario = req.body.idUsuario;
+    var idUsuario = req.params.idUsuario;
+    
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+    
+    // const imagem = req.file.filename;
+     const foto = req.file ? req.file.filename : null;
+    
+    //  const postagem = { foto}
+    
+    console.log(idUsuario)
+     console.log(`Título: ${titulo}, Descrição: ${descricao}, Foto: ${foto}`)
 
-
-    console.log(`ID do usuário: ${idUsuario}`)
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
     } else if (descricao == undefined) {
         res.status(400).send("A descrição está indefinido!");
-    }  else if (idUsuario == undefined) {
+    } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+        avisoModel.publicar(titulo, descricao, foto)
+            // avisoModel.publicar(postagem)
             .then(
-                function (resultado, idUsuario) {
+                function (resultado) {
                     res.json(resultado);
                     var idPostagem = resultado.insertId;
-                   return avisoModel.cadastrarInteracao(idUsuario, idPostagem);
-                }
-            )
+                    return avisoModel.cadastrarInteracao(idUsuario, idPostagem);
+                })
             .catch(
                 function (erro) {
                     console.log(erro);
@@ -95,17 +101,11 @@ function publicar(req, res) {
     }
 }
 
-
-
 function editar(req, res) {
     var novaDescricao = req.body.descricao;
-    var novoTitulo = req.body.titulo;
-    var idPostagem = req.params.idPostagem;
+    var idAviso = req.params.idAviso;
 
-    console.log(`ID da postagem: ${idPostagem}`)
-
-
-    avisoModel.editar(novaDescricao, novoTitulo, idPostagem)
+    avisoModel.editar(novaDescricao, idAviso)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -121,28 +121,23 @@ function editar(req, res) {
 
 }
 
-function deletarInteracao(req, res) {
-    // var idUsuario = req.body.idUsuarioServer;
-    var idUsuario = req.params.idUsuario;
+function deletar(req, res) {
+    var idAviso = req.params.idAviso;
 
-    var idPostagem = req.params.idPostagem;
-
-    console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
-
-    avisoModel.deletarInteracao(idUsuario, idPostagem)
-        .then(function(resultado) {
-            if (resultado.affectedRows > 0) {
-                res.status(200).json({ message: "Interação deletada com sucesso" });
-            } else {
-                res.status(404).json({ message: "Interação não encontrada" });
+    avisoModel.deletar(idAviso)
+        .then(
+            function (resultado) {
+                res.json(resultado);
             }
-        })
-        .catch(function (erro) {
-            console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
-
 
 module.exports = {
     listar,
@@ -150,5 +145,5 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletarInteracao
+    deletar
 }

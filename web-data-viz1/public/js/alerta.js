@@ -76,17 +76,17 @@ function alertar(resposta, idAquario) {
     }
 }
 
-function exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor) {
-    var indice = alertas.findIndex(item => item.idAquario == idAquario);
+// function exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor) {
+//     var indice = alertas.findIndex(item => item.idAquario == idAquario);
 
-    if (indice >= 0) {
-        alertas[indice] = { idAquario, temp, grauDeAviso, grauDeAvisoCor }
-    } else {
-        alertas.push({ idAquario, temp, grauDeAviso, grauDeAvisoCor });
-    }
+//     if (indice >= 0) {
+//         alertas[indice] = { idAquario, temp, grauDeAviso, grauDeAvisoCor }
+//     } else {
+//         alertas.push({ idAquario, temp, grauDeAviso, grauDeAvisoCor });
+//     }
 
-    exibirCards();
-}
+//     exibirCards();
+// }
 
 function removerAlerta(idAquario) {
     alertas = alertas.filter(item => item.idAquario != idAquario);
@@ -117,9 +117,9 @@ function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
     `;
 }
 
-function atualizacaoPeriodica() {
-    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-        obterdados(item.id)
-    });
-    setTimeout(atualizacaoPeriodica, 5000);
-}
+// function atualizacaoPeriodica() {
+//     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+//         obterdados(item.id)
+//     });
+//     setTimeout(atualizacaoPeriodica, 5000);
+// }

@@ -11,7 +11,7 @@
     <!-- icon coracao -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link rel="stylesheet" href="./../css/card.css">
+    <link rel="stylesheet" href="./../css/perfil.css">
     <!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
 
     <script src="../js/sessao.js"></script>
@@ -59,7 +59,7 @@
             </div>
 
             <ul class="navbar">
-                <li class="agora">
+                <li>
                     <a href="cards.html">Feed</a>
                 </li>
 
@@ -81,7 +81,7 @@
                 </div>
                 <li>
 
-                    <a href="perfil.html">Perfil</a>
+                    <a class="agora" href="perfil.html">Perfil</a>
                 </li>
                 <div class="btn-logout" onclick="limparSessao()">
                     <h3>Sair</h3>
@@ -91,31 +91,30 @@
     </div>
     <!--header fim-->
 
-    <!-- <input type="number" id="buscaInput"> -->
-    <!-- <button onclick="buscarPeloId()">Buscar</button> -->
-    <!-- <div id="container">
-  
-    </div> -->
+    <!-- PERFIL  -->
 
-    <div class="cards" id="cardAquarios">
-        <div class="divisao">
-            <div class="card">
-                <img src="../img/foto.jpeg" alt="">
-                <h1>Como acordei hoje</h1>
+    <div class="corpo">
+        <div class="post">
+            <div id="uf">
             </div>
-            <h2>${item.nome}</h2>
-            <img src="../img/braziliancore.jpg" alt="">
+            <h1 id="nome"></h1>
+            <h2 id="email"></h2>
 
-            <div class="texto">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived.
-                </p>
-            </div>
+            <div id="outros">
+                <div id="titulos">
+                    <span>Estilo Favorito</span>
+                    <div id="fkEstilo"></div>
+                </div>
+                <div id="titulos">
+                    <span>Idade</span>
+                    <div id="idade"></div>
+                </div>
+                <div id="titulos">
+                    <span>Data de Cadastro</span>
+                    <div id="dtCadastro"></div>
 
-            <div id="curtir">
-                <i id="curtir_icon" class="far fa-heart" onclick="curtir()"></i>
+                </div>
+
             </div>
         </div>
     </div>
@@ -136,6 +135,16 @@
                     const usuario = json[0];
                     container.innerHTML = `
     <img src='../assets/fotos/${usuario.foto}' alt="imagem de usuario">`
+
+                    uf.innerHTML = `
+    <img src='../assets/fotos/${usuario.foto}' alt="imagem de usuario">`
+
+                    nome.innerHTML = `<h1>${usuario.nome}</h1>`
+                    email.innerHTML = `<h2>${usuario.email}</h2>`
+
+                    idade.innerHTML = `${usuario.dtNasc} anos`
+                    dtCadastro.innerHTML = `${usuario.dtCadastro}`
+                    fkEstilo.innerHTML = ` ${usuario.fkEstilo}`
                 })
             })
             .catch(err => {
@@ -143,37 +152,4 @@
             })
     }
 
-    function exibirAquarios() {
-        //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-        //         document.getElementById("cardAquarios").innerHTML += `
-        //         <div class="divisao">
-        //         <div class="card">
-        //             <img src="../img/foto.jpeg" alt="">
-        //             <h1>Como acordei hoje</h1>
-        //         </div>
-        //         <h2>${usuario.nome}</h2>
-        // <img src='../assets/fotos/${usuario.foto}' alt="imagem de usuario">
-
-        //         <div id="curtir">
-        //             <i id="curtir_icon" class="far fa-heart" onclick="curtir()"></i>
-        //         </div>
-        //     </div>      
-        //                 `
-        //     });
-    }
-
-
-    function curtir() {
-        var icon = document.getElementById("curtir_icon");
-        if (icon.classList.contains("far")) {
-            icon.classList.remove("far");
-            icon.classList.add("fas", "curtido");
-        } else {
-            icon.classList.remove("fas", "curtido");
-            icon.classList.add("far");
-        }
-    }
-
 </script>
-
-</html>

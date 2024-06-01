@@ -17,7 +17,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 4px solid #4d044a;
+  border-bottom: 4px solid #093f15;
 }
 
 .header .container {
@@ -169,7 +169,7 @@ body {
 
 /* FOOTER  */
 .footer {
-  background-color: #4d044a;
+  background-color: #093f15;
   height: 150px;
   color: #fff;
   display: flex;
@@ -195,16 +195,16 @@ body {
 }
 .box-text h2 {
   color: #E2aa44;
-  font-size: 250%;
+  font-size: 200%;
   font-family: "Poppins", sans-serif;
   transition: transform 1s;
   transform: translateX(0) scale(1.0);
-}
+text-align: center;}
 
 .box-text h2:hover,
 .box-text h2:focus {
   color: #E2aa44;
-  font-size: 250%;
+  font-size: 200%;
   font-family: "Poppins", sans-serif;
   transform: translateX(10px) scale(1.2);
 }

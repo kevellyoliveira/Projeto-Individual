@@ -42,9 +42,7 @@
         <li>
           <a href="sobreNos.html">Sobre Nós</a>
         </li>
-        <li>
-          <a href="feed.html">Feed</a>
-        </li>
+      
         <li>
           <a href="estilos.html">Estilos</a>
         </li>
@@ -86,7 +84,11 @@
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
           </div>
-
+          <span>Foto: </span>
+          <label id="foto">
+            Adicionar foto
+            <input name="foto" id="foto" maxlength="100" type="file">
+        </label>
           <div class="campo">
             <span>Data de nascimento:</span>
             <input id="dtNasc_input" type="date" placeholder="17/08/2005" />
@@ -128,148 +130,112 @@
 </html>
 
 <script>
-  function cadastrar() {
-    aguardar();
 
+function cadastrar() {
     //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var dtNascVar = dtNasc_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var empresaVar = listaEmpresas.value
+    var empresaVar = listaEmpresas.value;
 
-    // outras validacoes
+    // Validações
     var termina_com_com = emailVar.endsWith(".com");
-    // div_mensagem.innerHTML += `<br> Começa com ".com"? ${termina_com_com}`;
-
     var indice_arroba = emailVar.indexOf("@");
-    // div_mensagem.innerHTML += `<br> Índice de @: ${indice_arroba}`;
 
-    if (termina_com_com == false) {
+    if (!termina_com_com) {
         cardErro.style.display = "block";
-        mensagem_erro.innerHTML =
-          "(Seu email não possui '.com')";
-  
+        mensagem_erro.innerHTML = "(Seu email não possui '.com')";
         finalizarAguardar();
         return false;
     }
 
     if (indice_arroba < 0) {
-      if (emailVar == indice_arroba) {
-      } else {
         cardErro.style.display = "block";
-        mensagem_erro.innerHTML =
-          "(Seu email não possui '@')";
-  
+        mensagem_erro.innerHTML = "(Seu email não possui '@')";
         finalizarAguardar();
         return false;
-      }
     }
 
-    if (nomeVar.length > 1) {
+    if (nomeVar.length <= 1) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)";
+        finalizarAguardar();
+        return false;
+    }
+
+    if (dtNascVar.length != 10) { // Ajuste o comprimento da data conforme o formato esperado (yyyy-mm-dd)
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(A quantidade de caracteres da data de nascimento é inválida)";
+        finalizarAguardar();
+        return false;
+    }
+
+    if (senhaVar !== confirmacaoSenhaVar) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Divergência de senhas! Tente novamente)";
+        finalizarAguardar();
+        return false;
+    }
+
+    if (senhaVar.length <= 6) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(A senha deve ter mais de 6 caracteres)";
+        finalizarAguardar();
+        return false;
+    }
+
+    if (nomeVar === "" || dtNascVar === "" || emailVar === "" || senhaVar === "" || confirmacaoSenhaVar === "" || empresaVar === "") {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        return false;
     } else {
-      cardErro.style.display = "block";
-
-      mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)";
-
-      finalizarAguardar();
-      return false;
+        setInterval(sumirMensagem, 5000);
     }
 
-    if (dtNascVar.length != 8) {
-    } else {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(A quantidade de caracteres da data de nascimento é invalido)";
+    // Criar um FormData e adicionar todos os campos
+    const formData = new FormData();
+    formData.append('nome', nomeVar);
+    formData.append('dtNasc', dtNascVar);
+    formData.append('email', emailVar);
+    formData.append('senha', senhaVar);
+    formData.append('confirmacaoSenha', confirmacaoSenhaVar);
+    formData.append('empresa', empresaVar);
+    formData.append('foto', foto.files[0]); // Adicionando a foto
 
-      finalizarAguardar();
-      return false;
-    }
-
-
-    if (senhaVar == confirmacaoSenhaVar) {
-    } else {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Divergência de senhas! Tente novamente)";
-
-      finalizarAguardar();
-      return false;
-    }
-
-    if (senhaVar.length > 6) {
-    } else {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(A senha deve ter mais de 6 caracteres)";
-
-      finalizarAguardar();
-      return false;
-    }
-
-    if (
-      nomeVar == "" ||
-      dtNascVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      empresaVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      // finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
-
-    // Enviando o valor da nova input
+    // Enviar a requisição com o FormData
     fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        dtNascServer: dtNascVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        confirmacaoSenhaSever: confirmacaoSenhaVar,
-        empresaServer: empresaVar
-      }),
+        method: "POST",
+        body: formData
     })
-      .then(function (resposta) {
+    .then(function(resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+            setTimeout(() => {
+                window.location = "login.html";
+            }, 2000);
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
+            limparFormulario();
+            finalizarAguardar();
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+            resposta.text().then(texto => {
+                mensagem_erro.innerHTML = `Erro: ${texto}`;
+            });
+            throw "Houve um erro ao tentar realizar o cadastro!";
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+    })
+    .catch(function(erro) {
+        console.log(`#ERRO: ${erro}`);
         finalizarAguardar();
-      });
+    });
 
     return false;
-  }
+}
 
   function listar() {
     fetch("/empresas/listar", {

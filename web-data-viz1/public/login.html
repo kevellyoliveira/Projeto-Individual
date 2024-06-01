@@ -44,9 +44,6 @@
               <a href="sobreNos.html">Sobre Nós</a>
             </li>
             <li>
-              <a href="feed.html">Feed</a>
-            </li>
-            <li>
               <a href="estilos.html">Estilos</a>
             </li>
           </ul>
@@ -153,8 +150,9 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.DTNASC_USUARIO = json.dtNasc;
                     sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.setItem('FOTO_USUARIO', json.fotoUrl);
                     sessionStorage.SENHA = json.senha;
-                    sessionStorage.USUARIO_FOTO = json.foto;
+                    // sessionStorage.USUARIO_FOTO = json.foto;
                     sessionStorage.EMPRESAID = json.Empresaid;
                     // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 

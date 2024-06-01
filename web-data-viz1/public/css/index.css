@@ -17,7 +17,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 4px solid #4d044a;
+  border-bottom: 4px solid #093f15;
 }
 
 .header .container {
@@ -171,7 +171,7 @@ body {
 
 .title h1:hover,
 .title h1:focus {
-  color: #4d044a;
+  color: #093f15;
   font-size: 500%;
   font-family: "Poppins", sans-serif;
   transform: translateX(10px) scale(1.2);
@@ -181,7 +181,7 @@ body {
 
 /* FOOTER  */
 .footer {
-  background-color: #5c0e59;
+  background-color: #093f15;
   height: 150px;
   color: #fff;
   display: flex;

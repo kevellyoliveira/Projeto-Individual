@@ -1,5 +1,4 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -57,13 +56,20 @@ function autenticar(req, res) {
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var nome = req.body.nomeServer;
-    var dtNasc = req.body.dtNascServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-    var confirmacao = req.body.confirmacaoSenhaSever;
-    var empresaId = req.body.empresaServer;
+    var nome = req.body.nome;
+    var dtNasc = req.body.dtNasc;
+    var email = req.body.email;
+    var senha = req.body.senha;
+    var confirmacao = req.body.confirmacaoSenha;
+    var empresaId = req.body.empresa;
 
+    // const imagem = req.file.filename;
+    const foto = req.file ? req.file.filename : null;
+
+    // const {nome, dtNasc, email, senha, confirmacao, empresaId} = req.body
+
+    const usuario = { nome, dtNasc, email, senha, foto, confirmacao, empresaId }
+    
     // Faça as validações dos valores
     if (nome == undefined && nome.length > 1) {
         res.status(400).send("Seu nome está undefined!");
@@ -76,12 +82,9 @@ function cadastrar(req, res) {
     } else if (empresaId == undefined) {
         res.status(400).send("Sua empresa está undefined!");
     } 
-    
-    
-    else {
-
+    else {  
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, dtNasc, email, senha, empresaId)
+        usuarioModel.cadastrar(usuario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -101,7 +104,16 @@ function cadastrar(req, res) {
     }
 }
 
+function buscarUsuarioPeloId(req, res) {
+    console.log(req.params.idUsuario); 
+    usuarioModel.buscarUsuarioPeloId(req.params.idUsuario)
+    .then(resultado => {
+      res.json(resultado);
+    }).catch(err => {
+      res.status(500).send(err);
+    });
+  }
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar, buscarUsuarioPeloId
 }
