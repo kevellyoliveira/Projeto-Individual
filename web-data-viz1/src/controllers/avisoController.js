@@ -2,20 +2,20 @@ var avisoModel = require("../models/avisoModel");
 
 function listar(req, res) {
     var idUsuario = req.params.idUsuario;
-    console.log(idUsuario); 
+    console.log(idUsuario);
 
     avisoModel.listar(idUsuario)
-    .then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function listarPorUsuario(req, res) {
@@ -77,13 +77,14 @@ function publicar(req, res) {
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, foto)
+        avisoModel.publicar(titulo, descricao, foto, idUsuario)
             .then(function (resultado) {
-                var idPostagem = resultado.insertId;
-                avisoModel.cadastrarInteracao(idUsuario, idPostagem)
-                    .then(function () {
-                        res.json({ insertId: idPostagem });
-                    });
+                console.log(resultado)
+                // var idPostagem = resultado.insertId
+                // avisoModel.cadastrarInteracao(idUsuario, idPostagem)
+                    // .then(function () {
+                    //     res.json({ insertId: idPostagem });
+                    // });
             })
             .catch(function (erro) {
                 console.log(erro);
@@ -119,14 +120,51 @@ function editar(req, res) {
 }
 
 
+// function deletar(req, res) {
+//     var idUsuario = req.params.idUsuario;
+//     var idPostagem = req.params.idPostagem;
 
-function deletar(req, res, idUsuario, idPostagem) {
-    var idUsuario = req.params.idUsuario;
+//     console.log(`idUsuario: ${idUsuario}, idPostagem: ${idPostagem}`)
+
+//     avisoModel.deletar(idUsuario, idPostagem)
+//         .then(
+//             function (resultado) {
+//                 res.json(resultado);
+//             }
+//         )
+//         .catch(
+//             function (erro) {
+//                 console.log(erro);
+//                 console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             }
+//         );
+// }
+
+function curtir(req, res) {
     var idPostagem = req.params.idPostagem;
+    var idUsuario = req.params.idUsuario;
 
-    console.log(`idUsuario: ${idUsuario}, idPostagem: ${idPostagem}`)
+    avisoModel.curtir(idPostagem, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao curtir o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
-    avisoModel.deletar(idUsuario, idPostagem)
+function deletarCurtida(req, res) {
+    var idPostagem = req.params.idPostagem;
+    var idUsuario = req.params.idUsuario
+
+    avisoModel.deletarCurtida(idUsuario, idPostagem)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -141,27 +179,55 @@ function deletar(req, res, idUsuario, idPostagem) {
         );
 }
 
-    // function deletarInteracao(req, res) {
-    //     // var idUsuario = req.body.idUsuarioServer;
-    //     var idUsuario = req.params.idUsuario;
+function VerCurtida(req, res) {
+    var idUsuario = req.body.idUsuarioServer;
+    var idPostagem = req.body.idPostagemServer;
 
-    //     var idPostagem = req.params.idPostagem;
 
-    //     console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
+    console.log(`Id Usuario: ${idUsuario}; Id Publicacao: ${idPostagem}`)
 
-    //     avisoModel.deletarInteracao(idUsuario, idPostagem)
-    //         .then(function (resultado) {
-    //             if (resultado.affectedRows > 0) {
-    //                 res.status(200).json({ message: "Interação deletada com sucesso" });
-    //             } else {
-    //                 res.status(404).json({ message: "Interação não encontrada" });
-    //             }
-    //         })
-    //         .catch(function (erro) {
-    //             console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
-    //             res.status(500).json(erro.sqlMessage);
-    //         });
-    // }
+    avisoModel.VerCurtida(idPostagem, idUsuario)
+        .then(
+            function (resultado) {
+                console.log(resultado)
+                if(resultado.length == 0){
+                    res.json('nenhuma');
+                }else
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro em achar as curtidas: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
+
+// function deletarInteracao(req, res) {
+//     // var idUsuario = req.body.idUsuarioServer;
+//     var idUsuario = req.params.idUsuario;
+
+//     var idPostagem = req.params.idPostagem;
+
+//     console.log(`Tentando deletar a interação com fkUsuario: ${idUsuario} e fkPostagem: ${idPostagem}`);
+
+//     avisoModel.deletarInteracao(idUsuario, idPostagem)
+//         .then(function (resultado) {
+//             if (resultado.affectedRows > 0) {
+//                 res.status(200).json({ message: "Interação deletada com sucesso" });
+//             } else {
+//                 res.status(404).json({ message: "Interação não encontrada" });
+//             }
+//         })
+//         .catch(function (erro) {
+//             console.log("Houve um erro ao deletar a interação: ", erro.sqlMessage);
+//             res.status(500).json(erro.sqlMessage);
+//         });
+// }
 
 
 
@@ -171,5 +237,8 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    // deletar,
+    curtir,
+    deletarCurtida,
+    VerCurtida
 }

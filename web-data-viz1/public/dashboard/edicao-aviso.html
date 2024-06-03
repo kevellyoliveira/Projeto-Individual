@@ -19,7 +19,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm()" style="background-color: rgb(31, 31, 31);">
+<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm(), teste()" style="background-color: rgb(31, 31, 31);">
     <!-- <body onload="validarSessao()"> -->
 
     <div class="janela">
@@ -88,15 +88,15 @@
             </div>
         </div>
         <!--header fim-->
-        </div>
+    </div>
 
-        <div class="dash-right">
+    <div class="dash-right">
 
-            <div class="avisos">
-                <div class="cont">
-                    <h1 class="ot">Editar um aviso</h1>
-                    <div class="div-form">
-                        <!-- <label>
+        <div class="avisos">
+            <div class="cont">
+                <h1 class="ot">Editar um aviso</h1>
+                <div class="div-form">
+                    <!-- <label>
                             Título:
                             <br>
                             <input name="titulo" id="titulo" maxlength="100" type="text">
@@ -108,23 +108,23 @@
                             <input name="foto" id="foto" maxlength="100" type="file" accept="image/*">
                         </label>
                         <br> -->
+                    <br>
+                    <label>
+                        Descrição (máximo de 250 caracteres):
                         <br>
-                        <label>
-                            Descrição (máximo de 250 caracteres):
-                            <br>
-                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                        </label>
-                        <br>
-                        <br>
-                        <button onclick="editar()">Editar</button>
-                        <!-- <button>Enviar</button> -->
+                        <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                    </label>
+                    <br>
+                    <br>
+                    <button onclick="editar()">Editar</button>
+                    <!-- <button>Enviar</button> -->
                     </form>
                 </div>
-                    </div>
-
-                </div>
             </div>
+
         </div>
+    </div>
+    </div>
     </div>
 </body>
 
@@ -155,27 +155,36 @@
     function listarInfosDeUm() {
         console.log("Criar função de trazer informações de post escolhido");
     }
+    
+    function editar(idPostagem) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var idPostagem = sessionStorage.ID_POSTAGEM;
 
-    function editar() {
-        var idPostagem = sessionStorage.getItem('idPostagem');
-        console.log(`idPostagem: ${idPostagem}`);
+        var novaDescricao = document.getElementById("textarea_descricao").value;
 
+        console.log("ID da Postagem:", idPostagem);
+        console.log("Nova Descrição:", novaDescricao);
+
+        if (!idPostagem) {
+            console.log("Nenhum ID de postagem encontrado no sessionStorage.");
+            return;
+        }
 
         fetch(`/avisos/editar/${idPostagem}`, {
-            method: "PUT",
-            // body: formData
+            method: "put",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                // titulo: input_titulo.value,
-                descricao: textarea_descricao.value
-            })
+            body: JSON.stringify(
+                { descricao: novaDescricao }
+            )
         }).then(function (resposta) {
-
             if (resposta.ok) {
+
                 window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
+                window.location = "/dashboard/mural.html";
+                idPostagem = '';
+
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -184,6 +193,9 @@
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
+
+        return false;
     }
+
 
 </script>

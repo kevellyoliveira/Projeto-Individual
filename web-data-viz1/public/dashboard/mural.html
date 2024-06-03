@@ -170,9 +170,12 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
-
+        // var idPostagem = req.params.idPostagem;
+        
+        // sessionStorage.setItem('idPostagem', idPostagem);
+        
         var formData = new FormData(document.getElementById("form_postagem"));
-
+        
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",
             body: formData
@@ -186,8 +189,7 @@
             }
         }).then(function (data) {
             var idPostagem = data.insertId;
-            sessionStorage.setItem('idPostagem', idPostagem);
-
+            
             window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "! ID da Postagem: " + idPostagem);
             window.location = "/dashboard/mural.html";
             limparFormulario();
@@ -196,52 +198,57 @@
             console.log(`#ERRO: ${resposta}`);
             finalizarAguardar();
         });
-
+        
         return false;
     }
 
-    function editar() {
-        var idPostagem = sessionStorage.getItem('idPostagem');
-        var novaDescricao = document.getElementById("textarea_descricao").value;
+    function editar(idPostagem) {        
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        // var idPostagem = req.params.idPostagem;
+        // var novaDescricao = document.getElementById("textarea_descricao").value;
 
         console.log("ID da Postagem:", idPostagem);
-        console.log("Nova Descrição:", novaDescricao);
+        window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+        window.location = "/dashboard/edicao-aviso.html";
 
-        if (!idPostagem) {
-            console.log("Nenhum ID de postagem encontrado no sessionStorage.");
-            return;
-        }
+        //  passar pelo sessionStorage ou state url
+        sessionStorage.ID_POSTAGEM = idPostagem;
 
-        fetch(`/avisos/editar/${idPostagem}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                descricao: novaDescricao
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html";
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+        // sessionStorage.DESCRICAO = descricao;
+
+        // fetch(`/avisos/editar/${idPostagem}`, {
+        //     method: "post",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(
+        //     //     {
+        //     //     descricao: novaDescricao
+        //     // }
+        // )
+        // }).then(function (idPostagem) {
+            // if (resposta.ok) {
+            // } else if (resposta.status == 404) {
+            //     window.alert("Deu 404!");
+            // } else {
+            //     throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            // }
+        // }).catch(function (resposta) {
+        //     console.log(`#ERRO: ${resposta}`);
+        // });
 
         return false;
     }
 
 
 
-    function deletar(idUsuario, idPostagem) {
+    function deletar(idPostagem) {
 
         var idUsuario = sessionStorage.ID_USUARIO;
-        var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
+        // var idPostagem = sessionStorage.getItem('idPostagem');
+
+        // var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
 
         console.log("Criar função de apagar post escolhido - ID" + idUsuario + ' e ' + idPostagem);
 
@@ -306,7 +313,7 @@
                         h1Titulo.innerHTML = publicacao.titulo;
 
                         divFotoPostagem.className = "foto_postagem";
-                        imgFoto.src = `../assets/fotos/${publicacao.foto}`;
+                        imgFoto.src = `../assets/fotos/${publicacao.ftPostagem}`;
                         imgFoto.alt = "Foto da Publicação";
 
                         divTexto.className = "texto1";
@@ -315,7 +322,7 @@
                         divCurtidas.id = "curtir1";
                         iconeCurtida.className = "fas fa-heart icon-dourado";
 
-                        divButtons.id = "btns";
+                        divButtons.id = "btns" + publicacao.idPostagem;
                         btnEditar.innerHTML = "Editar";
                         btnEditar.setAttribute("onclick", `editar(${publicacao.idPostagem})`);
 

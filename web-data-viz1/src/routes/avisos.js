@@ -27,18 +27,27 @@ router.post("/publicar/:idUsuario", upload.single('foto'), (req, res) => {
     avisoController.publicar(req, res);
 });
 
-router.put("/editar/:idPostagem", function (req, res)  {
+router.put("/editar/:idPostagem", function (req, res) {
     avisoController.editar(req, res);
 });
 
 router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
-    // var idUsuario = req.params.idUsuario;
-    // var idPostagem = req.params.idPostagem;
     avisoController.deletar(req, res);
 });
 
-// router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
-//     avisoController.deletarInteracao(idUsuario, idPostagem);
-// });
+router.post("/curtir/:idPostagem/:idUsuario", function (req, res) {
+    avisoController.curtir(req, res);
+});
+
+router.delete("/deletarCurtida/:idPostagem/:idUsuario", function (req, res) {
+    avisoController.deletarCurtida(req, res);
+});
+
+router.post("/VerCurtida/", function (req, res) {
+    console.log("TO NA ROTA")
+    avisoController.VerCurtida(req, res);
+
+});
+
 
 module.exports = router;

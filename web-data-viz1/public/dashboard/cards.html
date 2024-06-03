@@ -143,6 +143,96 @@
     }
 
 
+    // funcao curtir e descurtir 
+    function curtir(idPostagem) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var BUTAO = document.getElementById("Curtir" + idPostagem)
+
+        if (BUTAO.checked == false) {
+            console.log("Criar função de apagar post escolhido - ID" + idPostagem);
+            fetch(`/avisos/deletarCurtida/${idPostagem}/${idUsuario}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (resposta) {
+
+                if (resposta.ok) {
+                    window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                    window.location.reload(true);
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        } else
+
+            fetch(`/avisos/curtir/${idPostagem}/${idUsuario}`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Curtida efetuada")
+                    window.location.reload(true)
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
+
+    // vizualizar curtidas
+    function obterEstatistica(idPostagem, botao) {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/avisos/VerCurtida`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idPostagemServer: idPostagem,
+                idUsuarioServer: idUsuario,
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    console.log(idPostagem)
+
+                    var BUTAO = document.getElementById("Curtir" + idPostagem)
+                    if (resposta == 'nenhuma') {
+                        BUTAO.checked = false;
+                    } else {
+                        BUTAO.checked = true;
+                    }
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
     function atualizarFeed() {
         fetch(`/avisos/listar/`).then(function (resposta) {
             if (resposta.ok) {
@@ -158,60 +248,68 @@
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     var feed = document.getElementById("cardAquarios");
-feed.innerHTML = "";
-for (let i = 0; i < resposta.length; i++) {
-    var publicacao = resposta[i];
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
 
-    var divDivisao = document.createElement("div");
-    divDivisao.className = "divisao";
+                        var divDivisao = document.createElement("div");
+                        divDivisao.className = "divisao";
 
-    var divCard = document.createElement("div");
-    divCard.className = "card";
+                        var divCard = document.createElement("div");
+                        divCard.className = "card";
 
-    var imgUsuario = document.createElement("img");
-    imgUsuario.src = `../assets/fotos/${publicacao.ftUsuario}`;
-    imgUsuario.alt = "Foto do usuário";
-    imgUsuario.className = "img-usuario"; // Adiciona a classe CSS específica para a imagem do usuário
+                        var imgUsuario = document.createElement("img");
+                        imgUsuario.src = `../assets/fotos/${publicacao.ftUsuario}`;
+                        imgUsuario.alt = "Foto do usuário";
+                        imgUsuario.className = "img-usuario"; // Adiciona a classe CSS específica para a imagem do usuário
 
-    var h1Titulo = document.createElement("h1");
-    h1Titulo.innerHTML = publicacao.titulo;
+                        var h1Titulo = document.createElement("h1");
+                        h1Titulo.innerHTML = publicacao.titulo;
 
-    var h2NomeUsuario = document.createElement("h2");
-    h2NomeUsuario.innerHTML = publicacao.nome;
+                        var h2NomeUsuario = document.createElement("h2");
+                        h2NomeUsuario.innerHTML = publicacao.nome;
 
-    var imgPostagem = document.createElement("img");
-    imgPostagem.src = `../assets/fotos/${publicacao.ftPostagem}`;
-    imgPostagem.alt = "Foto da postagem";
-    imgPostagem.className = "img-postagem"; // Adiciona a classe CSS específica para a imagem da postagem
+                        var imgPostagem = document.createElement("img");
+                        imgPostagem.src = `../assets/fotos/${publicacao.ftPostagem}`;
+                        imgPostagem.alt = "Foto da postagem";
+                        imgPostagem.className = "img-postagem"; // Adiciona a classe CSS específica para a imagem da postagem
 
-    var divTexto = document.createElement("div");
-    divTexto.className = "texto";
-    var pDescricao = document.createElement("p");
-    pDescricao.innerHTML = publicacao.descricao;
-    divTexto.appendChild(pDescricao);
+                        var divTexto = document.createElement("div");
+                        divTexto.className = "texto";
+                        var pDescricao = document.createElement("p");
+                        pDescricao.innerHTML = publicacao.descricao;
+                        divTexto.appendChild(pDescricao);
+                        var divCurtir = document.createElement("div");
 
-    var divCurtir = document.createElement("div");
-    divCurtir.id = "curtir";
-    divCurtir.className = "curtir-container";
-    var iconeCurtir = document.createElement("i");
-    iconeCurtir.id = "curtir_icon";
-    iconeCurtir.className = "far fa-heart";
-    iconeCurtir.onclick = curtir;
-    divCurtir.appendChild(iconeCurtir);
+                        var Curtir = document.createElement("input");
+                        
+                        Curtir.type = "checkbox";
+                        Curtir.setAttribute("onclick", `curtir(${publicacao.idPostagem})`);
+                        Curtir.id = "Curtir" + publicacao.idPostagem;
+                        
+                        // divCurtir.id = "curtir";
+                        // divCurtir.className = "curtir-container";
 
-    divCard.appendChild(imgUsuario);
-    divCard.appendChild(h1Titulo);
+                        // var iconeCurtir = document.createElement("i");
+                        // iconeCurtir.id = "curtir_icon";
+                        // iconeCurtir.className = "far fa-heart";
+                        // iconeCurtir.onclick = curtir;
 
-    divDivisao.appendChild(divCard);
-    divDivisao.appendChild(h2NomeUsuario);
-    divDivisao.appendChild(imgPostagem);
-    divDivisao.appendChild(divTexto);
-    divDivisao.appendChild(divCurtir); // Mover o botão curtir para o final
+                        divDivisao.appendChild(Curtir);
+                        // divCurtir.appendChild(iconeCurtir);
+                        divCard.appendChild(imgUsuario);
+                        divCard.appendChild(h1Titulo);
 
-    feed.appendChild(divDivisao);
-}
+                        divDivisao.appendChild(divCard);
+                        divDivisao.appendChild(h2NomeUsuario);
+                        divDivisao.appendChild(imgPostagem);
+                        divDivisao.appendChild(divTexto);
+                        divDivisao.appendChild(divCurtir); // Mover o botão curtir para o final
 
+                        feed.appendChild(divDivisao);
 
+                        obterEstatistica(publicacao.idPostagem, (Curtir.id + 1))
+                    }
                     finalizarAguardar();
                 });
             } else {
@@ -244,16 +342,16 @@ for (let i = 0; i < resposta.length; i++) {
     }
 
 
-    function curtir() {
-        var icon = document.getElementById("curtir_icon");
-        if (icon.classList.contains("far")) {
-            icon.classList.remove("far");
-            icon.classList.add("fas", "curtido");
-        } else {
-            icon.classList.remove("fas", "curtido");
-            icon.classList.add("far");
-        }
-    }
+    // function curtir() {
+    //     var icon = document.getElementById("curtir_icon");
+    //     if (icon.classList.contains("far")) {
+    //         icon.classList.remove("far");
+    //         icon.classList.add("fas", "curtido");
+    //     } else {
+    //         icon.classList.remove("fas", "curtido");
+    //         icon.classList.add("far");
+    //     }
+    // }
 
 </script>
 
