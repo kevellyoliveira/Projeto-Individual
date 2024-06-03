@@ -201,7 +201,7 @@ body {
   color: #d1933f;
   font-family: "Great Vibes", cursive;
   font-size: 40px;
-  margin-top: 100px;
+  margin-top: 50px;
   animation: expandirContrair 2s infinite;  
 }
 
@@ -465,7 +465,7 @@ width: 100%;
   flex-direction: column;
   background-color: #191919;
   width: 450px;
-  height: 570px;
+  height: 650px;
 
   margin-bottom: 20px;
   margin-top: 2%;
@@ -501,14 +501,16 @@ width: 100%;
 
 
 .foto_postagem img {
-  width: 380px;
-  height: 330px;
-  display: flex;
-  align-self: center;
-  border-radius: 12px;
-  border: solid 2px #E2aa44;
-  margin-top: -5px;
-  margin-left: 35px;
+  width: 90%;       /* A imagem ocupa 90% da largura do contêiner */
+  height: 400px;   
+  align-self: center; /* Define a altura fixa da imagem */
+  object-fit: cover; /* Garante que a imagem se ajuste ao contêiner sem distorção */
+  /* align-self: center; */
+  /* border-radius: 12px; */
+  /* border: solid 2px #E2aa44; */
+  /* margin-top: -5px; */
+  margin-left: 22px;
+  
  }
 
 #curtir1 {

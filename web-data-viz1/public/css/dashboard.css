@@ -84,7 +84,7 @@ body {
 }
 
 .navbar1 img {
-        background-color: rgb(6, 85, 58);
+    background-color: aquamarine;
     width: 50px;
     height: 50px;
     border: 2px solid #fff;
@@ -173,24 +173,14 @@ box-shadow: 1px 1px 56px 13px rgba(0,0,0,0.75);
     padding-top: 50px;
 }
 
-
 #uf img {
-    border: #0f100f 3px solid;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #ddd; /* Cor de fundo padrão para quando não houver imagem */
-    object-fit: cover; /* Garante que a imagem preencha o contêiner */
-}
-
-
-/* #uf img {
     border: #0f100f 3px solid;
 
     width: 20%;
     height: 150px;
     border-radius: 50%;
-} */
+    /* Define o border-radius como 50% para fazer a imagem ficar completamente redonda */
+}
 
 #outros {
     display: flex;

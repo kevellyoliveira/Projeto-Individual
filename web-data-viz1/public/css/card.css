@@ -109,12 +109,15 @@ body {
   flex-direction: column;
   background-color: #191919;
   width: 450px;
-  height: 570px;
+  height: auto;
 
   margin-bottom: 20px;
   margin-top: 2%;
   margin-left: 3px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
+
+  position: relative; /* Permite posicionar o coração no final da divisão */
+
 
   border-radius: 12px;
   /* border: solid 4px #093f15; */
@@ -130,8 +133,8 @@ body {
 
 .card h1 {
   color: #ffffff;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 500;
   padding-left: 10px;
 }
 
@@ -139,20 +142,20 @@ body {
   color: #816334;
   font-size: 20px;
   font-weight: 400;
-  padding-left: 100px;
-  margin-top: -20px;
+  padding-left: 90px;
+  margin-top: -19px;
 }
 
-.divisao .card img {
+/* .fotoUsuario {
   width: 60px;
   height: 60px;
   border-radius: 100px;
   margin-top: 20px;
   margin-left: 20px;
   border: solid 2px #ffffff;
-}
+} */
 
-.divisao img {
+/* .divisao img {
   width: 380px;
   height: 330px;
   display: flex;
@@ -161,13 +164,13 @@ body {
   border: solid 2px #E2aa44;
   margin-top: -5px;
   margin-bottom: auto;
-}
+} */
 
 #curtir {
   display: flex;
   justify-content: start;
   padding-left: 30px;
-  margin-top: -10px;
+  /* margin-top: 20px; */
 }
 
 #curtir_icon {
@@ -183,9 +186,32 @@ body {
 p {
   align-self: center;
   color: #fff;
-  font-size: medium;
+  font-size: 17px;
   text-align: start;
   margin-left: 15px;
 
 }
 
+.img-usuario {
+  border-radius: 50%;
+  /* Exemplo de estilo: imagem do usuário em formato circular */
+  width: 50px;
+  /* Define a largura da imagem do usuário */
+  height: 50px;
+  margin-left: 10px;
+  /* Define a altura da imagem do usuário */
+}
+
+.img-postagem {
+  width: 90%;       /* A imagem ocupa 90% da largura do contêiner */
+  height: 400px;   
+  align-self: center; /* Define a altura fixa da imagem */
+  object-fit: cover; /* Garante que a imagem se ajuste ao contêiner sem distorção */
+}
+
+.curtir-container {
+  position: absolute;
+  bottom: 15px;      /* Ajuste conforme necessário */
+  right: 20px;       /* Ajuste conforme necessário */
+  align-self: start;
+}

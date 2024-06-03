@@ -71,7 +71,7 @@
                     </li>
 
                     <li>
-                        <a href="estilos.html">Interações</a>
+                        <a href="dashboard.html">Interações</a>
                     </li>
                 </ul>
 
@@ -96,7 +96,7 @@
                 <div class="cont">
                     <h1 class="ot">Editar um aviso</h1>
                     <div class="div-form">
-                        <label>
+                        <!-- <label>
                             Título:
                             <br>
                             <input name="titulo" id="titulo" maxlength="100" type="text">
@@ -107,7 +107,7 @@
                             Adicionar foto
                             <input name="foto" id="foto" maxlength="100" type="file" accept="image/*">
                         </label>
-                        <br>
+                        <br> -->
                         <br>
                         <label>
                             Descrição (máximo de 250 caracteres):
@@ -157,13 +157,18 @@
     }
 
     function editar() {
-        fetch(`/avisos/editar/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
+        var idPostagem = sessionStorage.getItem('idPostagem');
+        console.log(`idPostagem: ${idPostagem}`);
+
+
+        fetch(`/avisos/editar/${idPostagem}`, {
             method: "PUT",
+            // body: formData
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                titulo: input_titulo.value,
+                // titulo: input_titulo.value,
                 descricao: textarea_descricao.value
             })
         }).then(function (resposta) {

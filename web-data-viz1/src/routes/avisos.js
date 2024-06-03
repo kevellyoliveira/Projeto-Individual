@@ -27,14 +27,14 @@ router.post("/publicar/:idUsuario", upload.single('foto'), (req, res) => {
     avisoController.publicar(req, res);
 });
 
-router.put("/editar/:idPostagem", upload.single('foto'), (req, res) => {
+router.put("/editar/:idPostagem", function (req, res)  {
     avisoController.editar(req, res);
 });
 
 router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {
-    var idUsuario = req.params.idUsuario;
-    var idPostagem = req.params.idPostagem;
-    avisoController.deletarInteracao(req, res, idUsuario, idPostagem);
+    // var idUsuario = req.params.idUsuario;
+    // var idPostagem = req.params.idPostagem;
+    avisoController.deletar(req, res);
 });
 
 // router.delete("/deletar/:idUsuario/:idPostagem", function (req, res) {

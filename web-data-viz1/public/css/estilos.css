@@ -266,3 +266,22 @@ text-align: center;}
   transform: translateX(10px) scale(1.2);
 
 }
+
+/* titulo  */
+
+.social .ot {
+  color: #d1933f;
+  font-family: "Great Vibes", cursive;
+  font-size: 60px;
+  margin-top: 50px;
+  animation: expandirContrair 2s infinite;  
+}
+
+@keyframes expandirContrair {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+}

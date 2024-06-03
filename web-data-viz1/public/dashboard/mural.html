@@ -13,7 +13,7 @@
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> -->
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -74,7 +74,7 @@
                     </li>
 
                     <li>
-                        <a href="estilos.html">Interações</a>
+                        <a href="dashboard.html">Interações</a>
                     </li>
                 </ul>
 
@@ -144,9 +144,6 @@
 </html>
 
 <script>
-
-    // b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
     // FOTO NA NAVBAR
     function buscarPeloId() {
         var idUsuario = sessionStorage.ID_USUARIO;
@@ -174,35 +171,59 @@
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
 
-        // var titulo = form_postagem.titulo.value;
-        // var descricao = form_postagem.descricao.value;
-
-        // var corpo = {
-        //     titulo: form_postagem.titulo.value,
-        //     descricao: form_postagem.descricao.value
-        // }
-
         var formData = new FormData(document.getElementById("form_postagem"));
-
-
-        // const formData = new FormData();;
-        // formData.append('foto', foto.files[0]); // Adicionando a foto
 
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",
-            // headers: {
-            //     "Content-Type": "application/json"
-            // },
             body: formData
-            // body: JSON.stringify(corpo)
         }).then(function (resposta) {
-            console.log("resposta: ", resposta);
-
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                return resposta.json();  // Converta a resposta para JSON
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).then(function (data) {
+            var idPostagem = data.insertId;
+            sessionStorage.setItem('idPostagem', idPostagem);
+
+            window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "! ID da Postagem: " + idPostagem);
+            window.location = "/dashboard/mural.html";
+            limparFormulario();
+            finalizarAguardar();
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function editar() {
+        var idPostagem = sessionStorage.getItem('idPostagem');
+        var novaDescricao = document.getElementById("textarea_descricao").value;
+
+        console.log("ID da Postagem:", idPostagem);
+        console.log("Nova Descrição:", novaDescricao);
+
+        if (!idPostagem) {
+            console.log("Nenhum ID de postagem encontrado no sessionStorage.");
+            return;
+        }
+
+        fetch(`/avisos/editar/${idPostagem}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                descricao: novaDescricao
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
                 window.location = "/dashboard/mural.html";
-                limparFormulario();
-                finalizarAguardar();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -210,24 +231,21 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
         });
 
         return false;
-
     }
 
-    function editar(idAviso) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-        console.log("cliquei em editar - " + idAviso);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
-        window.location = "/dashboard/edicao-aviso.html"
 
-    }
 
-    function deletar(idAviso) {
-        console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        fetch(`/avisos/deletar/${idAviso}`, {
+    function deletar(idUsuario, idPostagem) {
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
+
+        console.log("Criar função de apagar post escolhido - ID" + idUsuario + ' e ' + idPostagem);
+
+        fetch(`/avisos/deletar/${idUsuario}/${idPostagem}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -247,86 +265,88 @@
         });
     }
 
-function atualizarFeed() {
-    fetch("/avisos/listar").then(function (resposta) {
-        if (resposta.ok) {
-            if (resposta.status == 204) {
-                var feed = document.getElementById("feed_container");
-                var mensagem = document.createElement("span");
-                mensagem.innerHTML = "Nenhum resultado encontrado."
-                feed.appendChild(mensagem);
-                throw "Nenhum resultado encontrado!!";
-            }
+    function atualizarFeed() {
+        var idUsuario = sessionStorage.ID_USUARIO;
 
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                var feed = document.getElementById("feed_container");
-                feed.innerHTML = "";
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
-
-                    // criando e manipulando elementos do HTML via JavaScript
-                    var divPublicacao = document.createElement("div");
-                    var divCard = document.createElement("div");
-                    var h1Titulo = document.createElement("h1");
-                    var divFotoPostagem = document.createElement("div");
-                    var imgFoto = document.createElement("img");
-                    var divTexto = document.createElement("div");
-                    var pDescricao = document.createElement("p");
-                    var divCurtidas = document.createElement("div");
-                    var iconeCurtida = document.createElement("i");
-                    var divButtons = document.createElement("div");
-                    var btnEditar = document.createElement("button");
-                    var btnDeletar = document.createElement("button");
-
-                    divPublicacao.className = "divisao1";
-                    divCard.className = "card1";
-                    h1Titulo.className = "h1Titulo";
-                    h1Titulo.innerHTML = publicacao.titulo;
-
-                    divFotoPostagem.className = "foto_postagem";
-                    imgFoto.src = `../assets/fotos/${publicacao.foto}`;
-                    imgFoto.alt = "Foto da Publicação";
-
-                    divTexto.className = "texto1";
-                    pDescricao.innerHTML = publicacao.descricao;
-
-                    divCurtidas.id = "curtir1";
-                    iconeCurtida.className = "fas fa-heart icon-dourado";
-
-                    divButtons.id = "btns";
-                    btnEditar.innerHTML = "Editar";
-                    btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                    btnDeletar.innerHTML = "Deletar";
-                    btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-
-                    divCard.appendChild(h1Titulo);
-                    divFotoPostagem.appendChild(imgFoto);
-                    divTexto.appendChild(pDescricao);
-                    divCurtidas.appendChild(iconeCurtida);
-                    divButtons.appendChild(btnEditar);
-                    divButtons.appendChild(btnDeletar);
-
-                    divPublicacao.appendChild(divCard);
-                    divPublicacao.appendChild(divFotoPostagem);
-                    divPublicacao.appendChild(divTexto);
-                    divPublicacao.appendChild(divCurtidas);
-                    divPublicacao.appendChild(divButtons);
-
-                    feed.appendChild(divPublicacao);
+        fetch(`/avisos/listar/${idUsuario}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
                 }
 
-                finalizarAguardar();
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-        finalizarAguardar();
-    });
-}
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var divCard = document.createElement("div");
+                        var h1Titulo = document.createElement("h1");
+                        var divFotoPostagem = document.createElement("div");
+                        var imgFoto = document.createElement("img");
+                        var divTexto = document.createElement("div");
+                        var pDescricao = document.createElement("p");
+                        var divCurtidas = document.createElement("div");
+                        var iconeCurtida = document.createElement("i");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+
+                        divPublicacao.className = "divisao1";
+                        divCard.className = "card1";
+                        h1Titulo.className = "h1Titulo";
+                        h1Titulo.innerHTML = publicacao.titulo;
+
+                        divFotoPostagem.className = "foto_postagem";
+                        imgFoto.src = `../assets/fotos/${publicacao.foto}`;
+                        imgFoto.alt = "Foto da Publicação";
+
+                        divTexto.className = "texto1";
+                        pDescricao.innerHTML = publicacao.descricao;
+
+                        divCurtidas.id = "curtir1";
+                        iconeCurtida.className = "fas fa-heart icon-dourado";
+
+                        divButtons.id = "btns";
+                        btnEditar.innerHTML = "Editar";
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idPostagem})`);
+
+                        btnDeletar.innerHTML = "Deletar";
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPostagem})`);
+
+                        divCard.appendChild(h1Titulo);
+                        divFotoPostagem.appendChild(imgFoto);
+                        divTexto.appendChild(pDescricao);
+                        divCurtidas.appendChild(iconeCurtida);
+                        divButtons.appendChild(btnEditar);
+                        divButtons.appendChild(btnDeletar);
+
+                        divPublicacao.appendChild(divCard);
+                        divPublicacao.appendChild(divFotoPostagem);
+                        divPublicacao.appendChild(divTexto);
+                        divPublicacao.appendChild(divCurtidas);
+                        divPublicacao.appendChild(divButtons);
+
+                        feed.appendChild(divPublicacao);
+                    }
+
+                    finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
 
 </script>

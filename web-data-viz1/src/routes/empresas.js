@@ -3,6 +3,10 @@ var router = express.Router();
 
 var empresaController = require("../controllers/empresaController");
 
+
+// Importando o multer configurado
+var upload = require('../config/configUpload');
+
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/cadastrar", function (req, res) {
     empresaController.cadastrar(req, res);

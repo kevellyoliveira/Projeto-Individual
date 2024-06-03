@@ -21,22 +21,15 @@ function cadastrar(nome, dtNasc, email, senha, foto, fkEstilo) {
 
 function buscarUsuarioPeloId(idUsuario) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():");
-    var instrucaoSql = `        SELECT 
-    idUsuario, 
-    u.nome, 
-    email,
+    var instrucaoSql = ` SELECT idUsuario, u.nome, email,
      truncate((DATEDIFF(CURRENT_DATE(), dtNasc) / 365),0) AS dtNasc,
-    senha, 
-    u.foto, 
+    senha, u.foto, 
     DATE_FORMAT(dtCadastro, '%d-%m-%Y') as dtCadastro, 
     e.nome as fkEstilo
- FROM 
-    Usuario AS u
-JOIN 
-    Estilo AS e
-ON 
-    u.fkEstilo = e.idEstilo
-     where idUsuario = ${idUsuario}  `;
+        FROM Usuario AS u
+    JOIN Estilo AS e ON u.fkEstilo = e.idEstilo
+     WHERE idUsuario = ${idUsuario}  `;
+     
     console.log("Executando a instrução SQL para cadastrar usuário: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
 }

@@ -11,18 +11,21 @@
     <!-- icon coracao -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link rel="icon" href="../img/logoFav.png">
+
+
     <link rel="stylesheet" href="./../css/card.css">
     <!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), buscarPeloId(), exibirAquarios()">
+<body onload="validarSessao(), buscarPeloId(), exibirAquarios(), atualizarFeed()">
 
     <!--header inicio-->
     <div class="header">
@@ -72,7 +75,7 @@
                 </li>
 
                 <li>
-                    <a href="estilos.html">Interações</a>
+                    <a href="dashboard.html">Interações</a>
                 </li>
             </ul>
 
@@ -100,18 +103,14 @@
     <div class="cards" id="cardAquarios">
         <div class="divisao">
             <div class="card">
-                <img src="../img/foto.jpeg" alt="">
-                <h1>Como acordei hoje</h1>
+                <img src="fotoUsuario" alt="">
+                <h1>titulo</h1>
             </div>
-            <h2>${item.nome}</h2>
-            <img src="../img/braziliancore.jpg" alt="">
+            <h2>usuarionome</h2>
+            <img src="fotoPostagem" alt="">
 
             <div class="texto">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived.
-                </p>
+                <p>descricao </p>
             </div>
 
             <div id="curtir">
@@ -142,6 +141,88 @@
                 console.log(err);
             })
     }
+
+
+    function atualizarFeed() {
+        fetch(`/avisos/listar/`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("cardAquarios");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado.";
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("cardAquarios");
+feed.innerHTML = "";
+for (let i = 0; i < resposta.length; i++) {
+    var publicacao = resposta[i];
+
+    var divDivisao = document.createElement("div");
+    divDivisao.className = "divisao";
+
+    var divCard = document.createElement("div");
+    divCard.className = "card";
+
+    var imgUsuario = document.createElement("img");
+    imgUsuario.src = `../assets/fotos/${publicacao.ftUsuario}`;
+    imgUsuario.alt = "Foto do usuário";
+    imgUsuario.className = "img-usuario"; // Adiciona a classe CSS específica para a imagem do usuário
+
+    var h1Titulo = document.createElement("h1");
+    h1Titulo.innerHTML = publicacao.titulo;
+
+    var h2NomeUsuario = document.createElement("h2");
+    h2NomeUsuario.innerHTML = publicacao.nome;
+
+    var imgPostagem = document.createElement("img");
+    imgPostagem.src = `../assets/fotos/${publicacao.ftPostagem}`;
+    imgPostagem.alt = "Foto da postagem";
+    imgPostagem.className = "img-postagem"; // Adiciona a classe CSS específica para a imagem da postagem
+
+    var divTexto = document.createElement("div");
+    divTexto.className = "texto";
+    var pDescricao = document.createElement("p");
+    pDescricao.innerHTML = publicacao.descricao;
+    divTexto.appendChild(pDescricao);
+
+    var divCurtir = document.createElement("div");
+    divCurtir.id = "curtir";
+    divCurtir.className = "curtir-container";
+    var iconeCurtir = document.createElement("i");
+    iconeCurtir.id = "curtir_icon";
+    iconeCurtir.className = "far fa-heart";
+    iconeCurtir.onclick = curtir;
+    divCurtir.appendChild(iconeCurtir);
+
+    divCard.appendChild(imgUsuario);
+    divCard.appendChild(h1Titulo);
+
+    divDivisao.appendChild(divCard);
+    divDivisao.appendChild(h2NomeUsuario);
+    divDivisao.appendChild(imgPostagem);
+    divDivisao.appendChild(divTexto);
+    divDivisao.appendChild(divCurtir); // Mover o botão curtir para o final
+
+    feed.appendChild(divDivisao);
+}
+
+
+                    finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
+
 
     function exibirAquarios() {
         //     JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
