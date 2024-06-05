@@ -174,7 +174,7 @@
 
     function publicar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-        // sessionStorage.ID_POSTAGEM = idPostagem;
+        sessionStorage.ID_POSTAGEM = idPostagem;
 
         console.log(idPostagem)
         var formData = new FormData(document.getElementById("form_postagem"));
@@ -205,7 +205,7 @@
     }
 
     function editar(idPostagem) {
-        // var idPostagem = sessionStorage.ID_POSTAGEM;
+        sessionStorage.ID_POSTAGEM = idPostagem; 
         console.log("ID da Postagem:", idPostagem);
         window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
         window.location = "/dashboard/edicao-aviso.html";

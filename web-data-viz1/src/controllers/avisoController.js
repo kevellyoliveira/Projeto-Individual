@@ -96,6 +96,7 @@ function editar(req, res) {
     
     var idPostagem = req.params.idPostagem;
     var novaDescricao = req.body.descricao;
+    var novoTitulo = req.body.titulo;
 
     console.log("ID da Postagem:", idPostagem);
     console.log("Nova Descrição:", novaDescricao);
@@ -105,10 +106,10 @@ function editar(req, res) {
     // } else if (!novaDescricao) {
     //     res.status(400).send("A nova descrição está indefinida!");
     // } else {
-        avisoModel.editar(novaDescricao, idPostagem)
+        avisoModel.editar(novaDescricao, novoTitulo, idPostagem)
             .then(function (resultado) {
                 res.json(resultado);
-                sessionStorage.ID_POSTAGEM = idPostagem;
+                // sessionStorage.ID_POSTAGEM = idPostagem;
             })
             .catch(function (erro) {
                 console.log(erro);

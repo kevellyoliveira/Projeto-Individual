@@ -96,14 +96,14 @@
             <div class="cont">
                 <h1 class="ot">Editar um aviso</h1>
                 <div class="div-form">
-                    <!-- <label>
+                     <label>
                             Título:
                             <br>
                             <input name="titulo" id="titulo" maxlength="100" type="text">
                         </label>
                         <br>
                         <br>
-                        <label id="foto">
+                      <!--  <label id="foto">
                             Adicionar foto
                             <input name="foto" id="foto" maxlength="100" type="file" accept="image/*">
                         </label>
@@ -158,13 +158,15 @@
     }
     
     function editar(idPostagem) {
-        // var idUsuario = sessionStorage.ID_USUARIO;
+        var idUsuario = sessionStorage.ID_USUARIO;
         var idPostagem = sessionStorage.ID_POSTAGEM;
 
         var novaDescricao = document.getElementById("textarea_descricao").value;
+        var novoTitulo = document.getElementById("titulo").value;
 
         console.log("ID da Postagem:", idPostagem);
         console.log("Nova Descrição:", novaDescricao);
+        console.log("Nova titulo:", novoTitulo);
 
         if (!idPostagem) {
             console.log("Nenhum ID de postagem encontrado no sessionStorage.");
@@ -177,7 +179,9 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(
-                { descricao: novaDescricao }
+                { descricao: novaDescricao,
+                    titulo: novoTitulo
+                 }
             )
         }).then(function (resposta) {
             if (resposta.ok) {

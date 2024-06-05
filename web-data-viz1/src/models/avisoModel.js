@@ -76,10 +76,10 @@ function publicar(titulo, descricao, foto, idUsuario) {
 }
 
 
-function editar(novaDescricao, idPostagem) {
-    console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idPostagem);
+function editar(novaDescricao, novoTitulo, idPostagem) {
+    console.log("ACESSEI O postagem MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, novoTitulo, idPostagem);
     var instrucaoSql = `
-        UPDATE postagem SET descricao = '${novaDescricao}' WHERE idPostagem = '${idPostagem}';
+        UPDATE postagem SET descricao = '${novaDescricao}', titulo = '${novoTitulo}' WHERE idPostagem = '${idPostagem}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
