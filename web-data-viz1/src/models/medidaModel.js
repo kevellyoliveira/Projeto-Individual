@@ -1,5 +1,16 @@
 var database = require("../database/config");
 
+function buscarUltimasMedidas(idUsuario) {
+
+    var instrucaoSql = ` select * from postagem 
+    join Usuario as u
+        on fkUsuario = idUsuario
+        where idUsuario = ${idUsuario};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarUltimasMedidas(idAquario, limite_linhas) {
 
     var instrucaoSql = `SELECT 

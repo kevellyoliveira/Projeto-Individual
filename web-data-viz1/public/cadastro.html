@@ -149,44 +149,32 @@ function cadastrar() {
         mensagem_erro.innerHTML = "(Seu email não possui '.com')";
         finalizarAguardar();
         return false;
-    }
-
-    if (indice_arroba < 0) {
+    }else if (indice_arroba < 0) {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(Seu email não possui '@')";
         finalizarAguardar();
         return false;
-    }
-
-    if (nomeVar.length <= 1) {
+    }else  if (nomeVar.length <= 1) {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)";
         finalizarAguardar();
         return false;
-    }
-
-    if (dtNascVar.length != 10) { // Ajuste o comprimento da data conforme o formato esperado (yyyy-mm-dd)
+    }else if (dtNascVar.length != 10) { // Ajuste o comprimento da data conforme o formato esperado (yyyy-mm-dd)
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(A quantidade de caracteres da data de nascimento é inválida)";
         finalizarAguardar();
         return false;
-    }
-
-    if (senhaVar !== confirmacaoSenhaVar) {
+    }else if (senhaVar !== confirmacaoSenhaVar) {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(Divergência de senhas! Tente novamente)";
         finalizarAguardar();
         return false;
-    }
-
-    if (senhaVar.length <= 6) {
+    }else if (senhaVar.length <= 6) {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(A senha deve ter mais de 6 caracteres)";
         finalizarAguardar();
         return false;
-    }
-
-    if (nomeVar === "" || dtNascVar === "" || emailVar === "" || senhaVar === "" || confirmacaoSenhaVar === "" || empresaVar === "") {
+    }else  if (nomeVar === "" || dtNascVar === "" || emailVar === "" || senhaVar === "" || confirmacaoSenhaVar === "" || empresaVar === "") {
         cardErro.style.display = "block";
         mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
         return false;

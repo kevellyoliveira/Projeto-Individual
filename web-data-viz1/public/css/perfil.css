@@ -211,3 +211,21 @@ box-shadow: 1px 1px 56px 13px rgba(0,0,0,0.75);
     color: #E2aa44;
     font-weight: 700;
 }
+
+#metrica1{
+    position: absolute;
+    top:110px;
+    left: 140px;
+    font-weight: 500;
+    color: #E2aa44;
+    font-size: 29px;
+}
+
+.qtd {
+    position: absolute;
+    top:78px;
+    left: 50px;
+
+    font-size: 22px;
+    color: #fff;
+}
