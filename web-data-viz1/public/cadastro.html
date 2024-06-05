@@ -85,7 +85,7 @@
             <input id="nome_input" type="text" placeholder="Seu nome" />
           </div>
           <span>Foto: </span>
-          <label id="foto">
+          <label htmlFor="foto">
             Adicionar foto
             <input name="foto" id="foto" maxlength="100" type="file">
         </label>
@@ -201,7 +201,7 @@ function cadastrar() {
     formData.append('email', emailVar);
     formData.append('senha', senhaVar);
     formData.append('confirmacaoSenha', confirmacaoSenhaVar);
-    formData.append('empresa', empresaVar);
+    formData.append('empresaId', empresaVar);
     formData.append('foto', foto.files[0]); // Adicionando a foto
 
     // Enviar a requisição com o FormData

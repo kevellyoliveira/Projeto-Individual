@@ -93,7 +93,7 @@ body {
 
 .btn-logout {
   color: #0c7422;
-  font-size: medium;
+  font-size: larger;
 
 }
 
@@ -166,22 +166,6 @@ body {
   margin-bottom: auto;
 } */
 
-#curtir {
-  display: flex;
-  justify-content: start;
-  padding-left: 30px;
-  /* margin-top: 20px; */
-}
-
-#curtir_icon {
-  font-size: 34px;
-  color: #fff;
-  cursor: pointer;
-}
-
-#curtir_icon.curtido {
-  color: #E2aa44;
-}
 
 p {
   align-self: center;
@@ -216,3 +200,53 @@ p {
   align-self: start;
 }
 
+/* input[type="checkbox"] {
+  position: absolute;
+  display: flex;
+  justify-content: start;
+  padding-left: 30px;
+  
+} */
+
+
+h3 {
+  /* margin-top: -15px;   */
+  color: #816334;
+  /* font-size: 26px; */
+} 
+/*
+#curtir {
+  display: flex;
+  align-items: center;
+}
+
+#curtir_icon {
+  font-size: 34px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px; 
+}
+
+#curtir_icon.curtido {
+  color: #E2aa44;
+} */
+
+#curtir {
+  display: flex;
+  justify-content: start;
+  flex-direction:  row;
+    padding-top: 60px;
+
+ 
+}
+
+#curtir_icon {
+  font-size: 34px;
+  color: #fff;
+  cursor: pointer;
+  /* padding-top: 60px; */
+}
+
+#curtir_icon.curtido {
+  color: #E2aa44;
+}

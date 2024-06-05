@@ -78,14 +78,11 @@ function publicar(req, res) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
         avisoModel.publicar(titulo, descricao, foto, idUsuario)
-            .then(function (resultado) {
-                console.log(resultado)
-                // var idPostagem = resultado.insertId
-                // avisoModel.cadastrarInteracao(idUsuario, idPostagem)
-                    // .then(function () {
-                    //     res.json({ insertId: idPostagem });
-                    // });
-            })
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
             .catch(function (erro) {
                 console.log(erro);
                 console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
@@ -96,20 +93,22 @@ function publicar(req, res) {
 
 
 function editar(req, res) {
+    
     var idPostagem = req.params.idPostagem;
     var novaDescricao = req.body.descricao;
 
     console.log("ID da Postagem:", idPostagem);
     console.log("Nova Descrição:", novaDescricao);
 
-    if (!idPostagem) {
-        res.status(400).send("O id da postagem está indefinido!");
-    } else if (!novaDescricao) {
-        res.status(400).send("A nova descrição está indefinida!");
-    } else {
+    // if (!idPostagem) {
+    //     res.status(400).send("O id da postagem está indefinido!");
+    // } else if (!novaDescricao) {
+    //     res.status(400).send("A nova descrição está indefinida!");
+    // } else {
         avisoModel.editar(novaDescricao, idPostagem)
             .then(function (resultado) {
                 res.json(resultado);
+                sessionStorage.ID_POSTAGEM = idPostagem;
             })
             .catch(function (erro) {
                 console.log(erro);
@@ -117,29 +116,29 @@ function editar(req, res) {
                 res.status(500).json(erro.sqlMessage);
             });
     }
-}
-
-
-// function deletar(req, res) {
-//     var idUsuario = req.params.idUsuario;
-//     var idPostagem = req.params.idPostagem;
-
-//     console.log(`idUsuario: ${idUsuario}, idPostagem: ${idPostagem}`)
-
-//     avisoModel.deletar(idUsuario, idPostagem)
-//         .then(
-//             function (resultado) {
-//                 res.json(resultado);
-//             }
-//         )
-//         .catch(
-//             function (erro) {
-//                 console.log(erro);
-//                 console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-//                 res.status(500).json(erro.sqlMessage);
-//             }
-//         );
 // }
+
+
+function deletar(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var idPostagem = req.params.idPostagem;
+
+    console.log(`idUsuario: ${idUsuario}, idPostagem: ${idPostagem}`)
+
+    avisoModel.deletar(idPostagem, idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
 function curtir(req, res) {
     var idPostagem = req.params.idPostagem;
@@ -190,10 +189,10 @@ function VerCurtida(req, res) {
         .then(
             function (resultado) {
                 console.log(resultado)
-                if(resultado.length == 0){
+                if (resultado.length == 0) {
                     res.json('nenhuma');
-                }else
-                res.json(resultado);
+                } else
+                    res.json(resultado);
             }
         )
         .catch(
@@ -237,7 +236,7 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    // deletar,
+    deletar,
     curtir,
     deletarCurtida,
     VerCurtida

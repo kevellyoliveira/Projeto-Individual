@@ -19,7 +19,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm(), teste()" style="background-color: rgb(31, 31, 31);">
+<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm()" style="background-color: rgb(31, 31, 31);">
     <!-- <body onload="validarSessao()"> -->
 
     <div class="janela">
@@ -134,7 +134,8 @@
 
     // b_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
-    function buscarPeloId() {
+   // FOTO NA NAVBAR
+   function buscarPeloId() {
         var idUsuario = sessionStorage.ID_USUARIO;
 
         fetch(`/usuarios/${idUsuario}`, {
@@ -157,7 +158,7 @@
     }
     
     function editar(idPostagem) {
-        var idUsuario = sessionStorage.ID_USUARIO;
+        // var idUsuario = sessionStorage.ID_USUARIO;
         var idPostagem = sessionStorage.ID_POSTAGEM;
 
         var novaDescricao = document.getElementById("textarea_descricao").value;

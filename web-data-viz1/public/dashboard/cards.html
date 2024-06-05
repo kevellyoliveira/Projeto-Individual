@@ -87,7 +87,7 @@
                     <a href="perfil.html">Perfil</a>
                 </li>
                 <div class="btn-logout" onclick="limparSessao()">
-                    <h3>Sair</h3>
+                    <h4>Sair</h4>
                 </div>
             </ul>
         </div>
@@ -114,7 +114,8 @@
             </div>
 
             <div id="curtir">
-                <i id="curtir_icon" class="far fa-heart" onclick="curtir()"></i>
+                <h3 id="curtidasQuantidade">qtd</h3>
+                <i id="curtir_icon" class="far fa-heart" onclick="curtirCori()"></i>
             </div>
         </div>
     </div>
@@ -158,7 +159,8 @@
             }).then(function (resposta) {
 
                 if (resposta.ok) {
-                    window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                    window.alert("Curtida retirada com sucesso!");
+                    // window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
                     window.location.reload(true);
                 } else if (resposta.status == 404) {
                     window.alert("Deu 404!");
@@ -280,23 +282,28 @@
                         pDescricao.innerHTML = publicacao.descricao;
                         divTexto.appendChild(pDescricao);
                         var divCurtir = document.createElement("div");
-
-                        var Curtir = document.createElement("input");
                         
+                        
+                        var Curtir = document.createElement("input");
                         Curtir.type = "checkbox";
                         Curtir.setAttribute("onclick", `curtir(${publicacao.idPostagem})`);
                         Curtir.id = "Curtir" + publicacao.idPostagem;
                         
-                        // divCurtir.id = "curtir";
-                        // divCurtir.className = "curtir-container";
+                        divCurtir.id = "curtir";
+                        divCurtir.className = "curtir-container";
+                        
+                        var h3qtdlike = document.createElement("h3");
+                        h3qtdlike.innerHTML = publicacao.qtd;
+                        divCurtir.appendChild(h3qtdlike);
 
-                        // var iconeCurtir = document.createElement("i");
-                        // iconeCurtir.id = "curtir_icon";
-                        // iconeCurtir.className = "far fa-heart";
-                        // iconeCurtir.onclick = curtir;
+                        var iconeCurtir = document.createElement("i");
+                        iconeCurtir.id = "curtir_icon";
+                        iconeCurtir.className = "far fa-heart";
+                        iconeCurtir.onclick = curtirCori;
 
-                        divDivisao.appendChild(Curtir);
-                        // divCurtir.appendChild(iconeCurtir);
+                        divCurtir.appendChild(Curtir);
+                        
+                        divCurtir.appendChild(iconeCurtir);
                         divCard.appendChild(imgUsuario);
                         divCard.appendChild(h1Titulo);
 
@@ -342,16 +349,16 @@
     }
 
 
-    // function curtir() {
-    //     var icon = document.getElementById("curtir_icon");
-    //     if (icon.classList.contains("far")) {
-    //         icon.classList.remove("far");
-    //         icon.classList.add("fas", "curtido");
-    //     } else {
-    //         icon.classList.remove("fas", "curtido");
-    //         icon.classList.add("far");
-    //     }
-    // }
+    function curtirCori() {
+        var icon = document.getElementById("curtir_icon");
+        if (icon.classList.contains("far")) {
+            icon.classList.remove("far");
+            icon.classList.add("fas", "curtido");
+        } else {
+            icon.classList.remove("fas", "curtido");
+            icon.classList.add("far");
+        }
+    }
 
 </script>
 

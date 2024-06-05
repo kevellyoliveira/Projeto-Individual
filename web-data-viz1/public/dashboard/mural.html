@@ -168,91 +168,54 @@
         document.getElementById("form_postagem").reset();
     }
 
-    function publicar() {
+    function publicar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-        // var idPostagem = req.params.idPostagem;
-        
-        // sessionStorage.setItem('idPostagem', idPostagem);
-        
+        sessionStorage.ID_POSTAGEM = idPostagem;
+
+        console.log(idPostagem)
         var formData = new FormData(document.getElementById("form_postagem"));
-        
+
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",
             body: formData
         }).then(function (resposta) {
+            console.log("resposta: ", resposta);
             if (resposta.ok) {
-                return resposta.json();  // Converta a resposta para JSON
+                window.alert("Post realizado com sucesso!");
+                // window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "! ID da Postagem: " + idPostagem);
+                window.location = "/dashboard/mural.html";
+                limparFormulario();
+                // return resposta.json();  
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
                 throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
-        }).then(function (data) {
-            var idPostagem = data.insertId;
-            
-            window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "! ID da Postagem: " + idPostagem);
-            window.location = "/dashboard/mural.html";
-            limparFormulario();
-            finalizarAguardar();
+            // finalizarAguardar();
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            // finalizarAguardar();
         });
-        
+
         return false;
     }
 
-    function editar(idPostagem) {        
-        var idUsuario = sessionStorage.ID_USUARIO;
-
-        // var idPostagem = req.params.idPostagem;
-        // var novaDescricao = document.getElementById("textarea_descricao").value;
-
+    function editar(idPostagem) {
+        // var idPostagem = sessionStorage.ID_POSTAGEM;
         console.log("ID da Postagem:", idPostagem);
         window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
         window.location = "/dashboard/edicao-aviso.html";
 
         //  passar pelo sessionStorage ou state url
-        sessionStorage.ID_POSTAGEM = idPostagem;
-
-        // sessionStorage.DESCRICAO = descricao;
-
-        // fetch(`/avisos/editar/${idPostagem}`, {
-        //     method: "post",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(
-        //     //     {
-        //     //     descricao: novaDescricao
-        //     // }
-        // )
-        // }).then(function (idPostagem) {
-            // if (resposta.ok) {
-            // } else if (resposta.status == 404) {
-            //     window.alert("Deu 404!");
-            // } else {
-            //     throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            // }
-        // }).catch(function (resposta) {
-        //     console.log(`#ERRO: ${resposta}`);
-        // });
-
-        return false;
     }
 
-
-
     function deletar(idPostagem) {
-
         var idUsuario = sessionStorage.ID_USUARIO;
-        // var idPostagem = sessionStorage.getItem('idPostagem');
-
-        // var idPostagem = sessionStorage.ID_POSTAGEM_EDITANDO;
+        var idPostagem = document.getElementById(idPostagem)
 
         console.log("Criar função de apagar post escolhido - ID" + idUsuario + ' e ' + idPostagem);
 
-        fetch(`/avisos/deletar/${idUsuario}/${idPostagem}`, {
+        fetch(`/avisos/deletar/${idPostagem}/${idUsuario}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -301,8 +264,8 @@
                         var imgFoto = document.createElement("img");
                         var divTexto = document.createElement("div");
                         var pDescricao = document.createElement("p");
-                        var divCurtidas = document.createElement("div");
-                        var iconeCurtida = document.createElement("i");
+                        // var divCurtidas = document.createElement("div");
+                        // var iconeCurtida = document.createElement("i");
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
@@ -319,8 +282,8 @@
                         divTexto.className = "texto1";
                         pDescricao.innerHTML = publicacao.descricao;
 
-                        divCurtidas.id = "curtir1";
-                        iconeCurtida.className = "fas fa-heart icon-dourado";
+                        // divCurtidas.id = "curtir1";
+                        // iconeCurtida.className = "fas fa-heart icon-dourado";
 
                         divButtons.id = "btns" + publicacao.idPostagem;
                         btnEditar.innerHTML = "Editar";
@@ -332,20 +295,20 @@
                         divCard.appendChild(h1Titulo);
                         divFotoPostagem.appendChild(imgFoto);
                         divTexto.appendChild(pDescricao);
-                        divCurtidas.appendChild(iconeCurtida);
+                        // divCurtidas.appendChild(iconeCurtida);
                         divButtons.appendChild(btnEditar);
                         divButtons.appendChild(btnDeletar);
 
                         divPublicacao.appendChild(divCard);
                         divPublicacao.appendChild(divFotoPostagem);
                         divPublicacao.appendChild(divTexto);
-                        divPublicacao.appendChild(divCurtidas);
+                        // divPublicacao.appendChild(divCurtidas);
                         divPublicacao.appendChild(divButtons);
 
                         feed.appendChild(divPublicacao);
                     }
 
-                    finalizarAguardar();
+                    // finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
