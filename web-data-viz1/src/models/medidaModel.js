@@ -1,40 +1,22 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idUsuario) {
+function buscarUltimasMedidas() {
 
-    var instrucaoSql = ` select * from postagem 
-    join Usuario as u
-        on fkUsuario = idUsuario
-        where idUsuario = ${idUsuario};`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function buscarUltimasMedidas(idAquario, limite_linhas) {
-
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    FROM medida
-                    WHERE fk_aquario = ${idAquario}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    var instrucaoSql = ` select COUNT(fkEstilo) as soma, e.nome  from usuario
+	right join Estilo as e
+		on fkEstilo = idEstilo
+	group by nome;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
 
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
+function buscarMedidasEmTempoReal() {
+    var instrucaoSql = `select COUNT(fkEstilo) as soma, e.nome  from usuario
+	right join Estilo as e
+		on fkEstilo = idEstilo
+	group by nome;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
