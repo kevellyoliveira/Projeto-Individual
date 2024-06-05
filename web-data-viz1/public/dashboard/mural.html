@@ -13,7 +13,7 @@
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -129,12 +129,16 @@
                     <h1 class="ot">Mural de Avisos</h1>
                     <div class="div-results">
                         <div id="feed_container" class="feed-container">
+
+                            <!-- <div id="curtir"> -->
+                                <h3 id="curtidasQuantidade">qtd</h3>
+                                <!-- <i id="curtir_icon" class="far fa-heart" onclick="curtirCori()"></i> -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -170,7 +174,7 @@
 
     function publicar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-        sessionStorage.ID_POSTAGEM = idPostagem;
+        // sessionStorage.ID_POSTAGEM = idPostagem;
 
         console.log(idPostagem)
         var formData = new FormData(document.getElementById("form_postagem"));
@@ -211,7 +215,8 @@
 
     function deletar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
-        var idPostagem = document.getElementById(idPostagem)
+        // var idPostagem = sessionStorage.ID_POSTAGEM;
+        window.alert("id postagem!" + idPostagem);
 
         console.log("Criar função de apagar post escolhido - ID" + idUsuario + ' e ' + idPostagem);
 
@@ -264,8 +269,8 @@
                         var imgFoto = document.createElement("img");
                         var divTexto = document.createElement("div");
                         var pDescricao = document.createElement("p");
-                        // var divCurtidas = document.createElement("div");
-                        // var iconeCurtida = document.createElement("i");
+                        var divCurtidas = document.createElement("div");
+                        var iconeCurtida = document.createElement("i");
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
@@ -282,8 +287,8 @@
                         divTexto.className = "texto1";
                         pDescricao.innerHTML = publicacao.descricao;
 
-                        // divCurtidas.id = "curtir1";
-                        // iconeCurtida.className = "fas fa-heart icon-dourado";
+                        divCurtidas.id = "curtir";
+                        iconeCurtida.className = "fas fa-heart icon-dourado";
 
                         divButtons.id = "btns" + publicacao.idPostagem;
                         btnEditar.innerHTML = "Editar";
@@ -292,20 +297,28 @@
                         btnDeletar.innerHTML = "Deletar";
                         btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPostagem})`);
 
+                        var h3qtdlike = document.createElement("h3");
+                        h3qtdlike.innerHTML = publicacao.qtd;
+                        divCurtidas.appendChild(h3qtdlike);
+
                         divCard.appendChild(h1Titulo);
                         divFotoPostagem.appendChild(imgFoto);
                         divTexto.appendChild(pDescricao);
-                        // divCurtidas.appendChild(iconeCurtida);
+                        divCurtidas.appendChild(iconeCurtida);
                         divButtons.appendChild(btnEditar);
                         divButtons.appendChild(btnDeletar);
 
                         divPublicacao.appendChild(divCard);
                         divPublicacao.appendChild(divFotoPostagem);
                         divPublicacao.appendChild(divTexto);
-                        // divPublicacao.appendChild(divCurtidas);
+                        divPublicacao.appendChild(divCurtidas);
                         divPublicacao.appendChild(divButtons);
 
                         feed.appendChild(divPublicacao);
+
+                        console.log(`id da postagem: ${publicacao.idPostagem}`)
+                        
+                        // sessionStorage.ID_POSTAGEM = publicacao.idPostagem;
                     }
 
                     // finalizarAguardar();
@@ -318,5 +331,17 @@
             finalizarAguardar();
         });
     }
+
+
+    // function curtirCori() {
+    //     var icon = document.getElementById("curtir_icon");
+    //     if (icon.classList.contains("far")) {
+    //         icon.classList.remove("far");
+    //         icon.classList.add("fas", "curtido");
+    //     } else {
+    //         icon.classList.remove("fas", "curtido");
+    //         icon.classList.add("far");
+    //     }
+    // }
 
 </script>

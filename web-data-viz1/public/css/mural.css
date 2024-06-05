@@ -166,13 +166,13 @@ body {
   margin-bottom: auto;
   /* Centraliza verticalmente dentro da div */
 }
-
+/* 
 #curtir {
   display: flex;
   justify-content: start;
   padding-left: 30px;
   padding-top: 5px;
-}
+} */
 
 #curtir_icon {
   font-size: 28px;
@@ -513,11 +513,11 @@ width: 100%;
   
  }
 
-#curtir1 {
+#curtir {
   display: flex;
   justify-content:center;
 
-  height: 2500px;
+  /* height: 2500px; */
   align-items: end;
   /* margin-top: -4px; */
   
@@ -544,7 +544,7 @@ width: 100%;
   justify-content: space-around;
   flex-direction: row;
   
-  /* width: 10%; */
+  margin-left: -10px;
 }
 
 #btns button {
