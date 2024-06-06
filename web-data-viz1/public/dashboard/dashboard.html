@@ -34,7 +34,7 @@
     <div class="janela">
         <!--header inicio-->
         <div class="header">
-            <div class="container1">
+            <div class="container">
                 <div class="logo">
                     <svg width="74" height="51" viewBox="0 0 204 161" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -116,8 +116,8 @@
 
 <script>
 
-    function buscarPeloId() {
-        var idUsuario = sessionStorage.ID_USUARIO;
+function buscarPeloId(idUsuario) {
+        // var idUsuario = sessionStorage.ID_USUARIO;
 
         fetch(`/usuarios/${idUsuario}`, {
             method: "GET"
@@ -262,7 +262,7 @@
         let dados = {
             labels: labels,
             datasets: [{
-                label: '',
+                label: 'Quantidade de usuários',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(225, 225, 255)',

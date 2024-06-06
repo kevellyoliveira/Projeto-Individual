@@ -9,7 +9,7 @@ body {
   background-color: rgb(31, 31, 31);
 }
 
-.container1 {
+.container {
   display: flex;
   width: 80%;
   margin: auto;
@@ -20,7 +20,7 @@ body {
   border-bottom: 4px solid #093f15;
 }
 
-.header .container1 {
+.header .container {
   justify-content: space-between;
   align-items: center;
   height: 100%;
@@ -573,3 +573,5 @@ span {
 color: #fff;
 font-size: larger;
 }
+
+  

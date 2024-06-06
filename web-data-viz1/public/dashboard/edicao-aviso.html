@@ -25,7 +25,7 @@
     <div class="janela">
 
         <div class="header">
-            <div class="container1">
+            <div class="container">
                 <div class="logo">
                     <svg width="74" height="51" viewBox="0 0 204 161" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -156,10 +156,17 @@
     function listarInfosDeUm() {
         console.log("Criar função de trazer informações de post escolhido");
     }
+
     
     function editar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
         var idPostagem = sessionStorage.ID_POSTAGEM;
+        // var titulo = sessionStorage.TITULO; 
+        
+        // titulo.value = `${titulo}`;
+        // descricao.value = `${descricao}`;
+    
+        // var descricao = sessionStorage.DESCRICAO; 
 
         var novaDescricao = document.getElementById("textarea_descricao").value;
         var novoTitulo = document.getElementById("titulo").value;

@@ -123,7 +123,7 @@
                             </label>
                             <br>
                             <br>
-                            <button>Enviar</button>
+                            <button class="enviar">Enviar</button>
                         </form>
                     </div>
                     <h1 class="ot">Mural de Avisos</h1>
@@ -206,6 +206,8 @@
 
     function editar(idPostagem) {
         sessionStorage.ID_POSTAGEM = idPostagem; 
+
+
         console.log("ID da Postagem:", idPostagem);
         window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
         window.location = "/dashboard/edicao-aviso.html";
@@ -272,6 +274,7 @@
                         var divCurtidas = document.createElement("div");
                         var iconeCurtida = document.createElement("i");
                         var divButtons = document.createElement("div");
+                        var divBotao = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
@@ -287,6 +290,7 @@
                         divTexto.className = "texto1";
                         pDescricao.innerHTML = publicacao.descricao;
 
+                        divBotao.id = "botao";
                         divCurtidas.id = "curtir";
                         iconeCurtida.className = "fas fa-heart icon-dourado";
 
@@ -305,20 +309,21 @@
                         divFotoPostagem.appendChild(imgFoto);
                         divTexto.appendChild(pDescricao);
                         divCurtidas.appendChild(iconeCurtida);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
+                        divBotao.appendChild(btnEditar);
+                        divBotao.appendChild(btnDeletar);
+                        divCurtidas.appendChild(divBotao);
 
                         divPublicacao.appendChild(divCard);
                         divPublicacao.appendChild(divFotoPostagem);
                         divPublicacao.appendChild(divTexto);
                         divPublicacao.appendChild(divCurtidas);
                         divPublicacao.appendChild(divButtons);
-
+                        divPublicacao.appendChild(divBotao);
                         feed.appendChild(divPublicacao);
+
 
                         console.log(`id da postagem: ${publicacao.idPostagem}`)
                         
-                        // sessionStorage.ID_POSTAGEM = publicacao.idPostagem;
                     }
 
                     // finalizarAguardar();

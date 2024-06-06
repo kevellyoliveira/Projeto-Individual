@@ -13,7 +13,7 @@ function autenticar(email, senha) {
 function cadastrar(usuario) {
   
     var instrucaoSql = `
-        INSERT INTO usuario (nome, dtNasc, email, senha, foto, fkEstilo) VALUES ('${usuario.nome}', '${usuario.dtNasc}', '${usuario.email}', '${usuario.senha}', '${usuario.foto}', '${usuario.empresaId}');
+        INSERT INTO Usuario (nome, dtNasc, email, senha, foto, fkEstilo) VALUES ('${usuario.nome}', '${usuario.dtNasc}', '${usuario.email}', '${usuario.senha}', '${usuario.foto}', '${usuario.empresaId}');
     `;
     console.log("Executando a instrução SQL para cadastrar usuário: \n" + instrucaoSql);
     return database.executar(instrucaoSql)

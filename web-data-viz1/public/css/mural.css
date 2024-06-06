@@ -166,23 +166,7 @@ body {
   margin-bottom: auto;
   /* Centraliza verticalmente dentro da div */
 }
-/* 
-#curtir {
-  display: flex;
-  justify-content: start;
-  padding-left: 30px;
-  padding-top: 5px;
-} */
 
-#curtir_icon {
-  font-size: 28px;
-  color: grey;
-  cursor: pointer;
-}
-
-#curtir_icon.curtido {
-  color: red;
-}
 
 /* criar post  */
 
@@ -200,11 +184,12 @@ body {
 .cont .ot {
   color: #d1933f;
   font-family: "Great Vibes", cursive;
-  font-size: 40px;
+  font-size: 50px;
   margin-top: 50px;
-  animation: expandirContrair 2s infinite;  
+  /* animation: expandirContrair 2s infinite;   */
 }
 
+/* 
 @keyframes expandirContrair {
   0%, 100% {
       transform: scale(1);
@@ -212,7 +197,7 @@ body {
   50% {
       transform: scale(1.2);
   }
-}
+} */
 
 #form_postagem {
   width: 100%;
@@ -329,9 +314,8 @@ input[type="file"] {
   transform: translateX(10px) scale(1.1);
 }
 
-button {
-  /* padding-left: 80px;
-  padding-top: 10px; */
+.enviar {
+
 
   background-color: #e7a833;
   border: #0d601f00 2px solid;
@@ -342,17 +326,12 @@ button {
 
   color: #000;
   font-size: large;
-
-  /* -webkit-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
-  box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75); */
-
   transition: transform 1s;
   transform: translateX(0) scale(1.0);
 }
 
-button:hover,
-button:focus {
+.enviar:hover,
+.enviar:focus {
   background-color: #9f7322;
   border: #0d601f00 2px solid;
   border-radius: 10px;
@@ -391,7 +370,7 @@ button:focus {
 .feed-container {
   display: flex;
   flex-direction: column;
-width: 100%;
+  width: 100%;
   /* gap: 20px; */
   padding: 20px;
 
@@ -431,10 +410,11 @@ width: 100%;
   line-height: 1.5;
 }
 
-.post-footer {
+/* .post-footer {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+   gap: 10px;
 }
 
 .post-footer button {
@@ -449,7 +429,7 @@ width: 100%;
 
 .post-footer button:hover {
   background-color: #d1933f;
-}
+} */
 
 #feed_container {
   display: flex;
@@ -483,7 +463,7 @@ width: 100%;
   padding-left: 10px;
 }
 
-.h1Titulo{
+.h1Titulo {
   color: #ffffff;
   font-size: 24px;
   font-weight: 600;
@@ -501,26 +481,41 @@ width: 100%;
 
 
 .foto_postagem img {
-  width: 90%;       /* A imagem ocupa 90% da largura do contêiner */
-  height: 400px;   
-  align-self: center; /* Define a altura fixa da imagem */
-  object-fit: cover; /* Garante que a imagem se ajuste ao contêiner sem distorção */
+  width: 90%;
+  /* A imagem ocupa 90% da largura do contêiner */
+  height: 400px;
+  align-self: center;
+  /* Define a altura fixa da imagem */
+  object-fit: cover;
+  /* Garante que a imagem se ajuste ao contêiner sem distorção */
   /* align-self: center; */
   /* border-radius: 12px; */
   /* border: solid 2px #E2aa44; */
   /* margin-top: -5px; */
   margin-left: 22px;
-  
- }
+}
 
 #curtir {
   display: flex;
-  justify-content:center;
+  justify-content: center;
+  align-items: center;
+}
 
-  /* height: 2500px; */
-  align-items: end;
-  /* margin-top: -4px; */
-  
+/* #curtir_icon {
+  font-size: 28px;
+  color: grey;
+  cursor: pointer;
+}
+
+#curtir_icon.curtido {
+  color: red;
+} */
+
+
+#botao{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 
@@ -539,15 +534,24 @@ width: 100%;
 
 }
 
- #btns {
+
+
+
+#botao {
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
-  
-  margin-left: -10px;
 }
 
-#btns button {
+#botao button {
+  width: 100px;
+  height: 30px;
+  background-color: #E2aa44;
+  font-size: medium;
+  border-radius: 5px;
+  border: none;
+}
+
+/* #btns button {
   width: 100px;
   height: 30px;
   background-color: #E2aa44;
@@ -557,8 +561,8 @@ width: 100%;
 
   transition: transform 1s;
   transform: translateX(0) scale(0.9);
-}
-
+} */
+/* 
 #btns button:hover,
 #btns button:focus {
   width: 100px;
@@ -569,8 +573,15 @@ width: 100%;
   border: none;
 
   transform: translateX(8px) scale(1.1);
-}
+} */
+
 span {
-color: #fff;
-font-size: larger;
+  color: #fff;
+  font-size: larger;
+}
+
+h3 {
+  color: #9f7322;
+  padding-right: 10px;
+  font-size: 22px;
 }
