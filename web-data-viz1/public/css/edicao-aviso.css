@@ -200,19 +200,19 @@ body {
 .cont .ot {
   color: #d1933f;
   font-family: "Great Vibes", cursive;
-  font-size: 40px;
+  font-size: 50px;
   margin-top: 50px;
-  animation: expandirContrair 2s infinite;  
+  /* animation: expandirContrair 2s infinite;   */
 }
 
-@keyframes expandirContrair {
+/* @keyframes expandirContrair {
   0%, 100% {
       transform: scale(1);
   }
   50% {
       transform: scale(1.2);
   }
-}
+} */
 
 #form_postagem {
   width: 100%;

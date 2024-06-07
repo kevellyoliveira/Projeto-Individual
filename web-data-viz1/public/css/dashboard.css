@@ -30,11 +30,25 @@ body {
     text-decoration: none;
     color: #e3b062;
     font-size: larger;
-}
-
-.agora {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .header a:hover {
+    font-weight: bold;
+    transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+  }
+  
+  .agora {
     font-weight: 800;
-}
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .agora:hover {
+    font-weight: 800;
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+  
+  }
 
 .navbar {
     width: 340px;
@@ -209,15 +223,71 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+
+    padding-bottom: 60px;
+
 }
 
 .canva {
     width: 50%;
+    margin-top: 10px;
+
 }
 
 #corpo h1{
     color: #E2aa44;
     font-weight: 550;
-    font-size: 50px;
-    font-family: "Great Vibes", cursive;
+    font-size: 30px;
+    margin-top: 90px;
+    /* font-family: "Great Vibes", cursive; */
 }
+
+/* FOOTER  */
+.footer {
+    background-color: #093f15;
+    height: 200px;
+    color: #fff;
+    display: flex;
+    font-size: 15px;
+  
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .footer .container {
+     display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  
+  }
+  .footer .container .outros {
+     display: flex;
+    justify-content: center;
+    text-align: center;
+    /* flex-direction: column; */
+    margin-top: 20px;
+  
+  }
+  
+  .footer .container a {
+     margin-left: 50px;
+     padding-top: 40px;
+     font-weight: 600;
+     font-size: medium;
+     color: unset;
+     text-decoration: none;
+  }
+  
+  .footer .container h4 {
+     margin-left: 50px;
+  
+  }
+  
+  .footer .container .version {
+    font-size: 12px;
+    
+  }
+  

@@ -30,12 +30,25 @@ body {
     text-decoration: none;
     color: #e3b062;
     font-size: larger;
-
-}
-
-.agora {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .header a:hover {
+    font-weight: bold;
+    transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+  }
+  
+  .agora {
     font-weight: 800;
-}
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .agora:hover {
+    font-weight: 800;
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+  
+  }
 
 .navbar {
     width: 340px;
@@ -146,6 +159,13 @@ body {
 .formulario span {
     font-size: 15px;
     font-weight: 800;
+}
+
+.formulario span a {
+    font-size: 15px;
+    font-weight: 800;
+    color: unset;
+    text-decoration: none;  
 }
 
 .formulario input {

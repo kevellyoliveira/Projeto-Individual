@@ -30,12 +30,25 @@ body {
   text-decoration: none;
   color: #e3b062;
   font-size: larger;
+  transition: transform 0.5s ease-in-out;
+}
+
+.header a:hover {
+  font-weight: bold;
+  transform: translateY(-50px); /* Ajuste este valor conforme necessário */
 }
 
 .agora {
   font-weight: 800;
+  transition: transform 0.5s ease-in-out;
 }
 
+.agora:hover {
+  font-weight: 800;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+
+}
 .navbar {
   width: 340px;
   display: flex;
@@ -183,7 +196,7 @@ body {
 
 .cont .ot {
   color: #d1933f;
-  font-family: "Great Vibes", cursive;
+  /* font-family: "Great Vibes", cursive; */
   font-size: 50px;
   margin-top: 50px;
   /* animation: expandirContrair 2s infinite;   */
@@ -274,14 +287,14 @@ input[type="file"] {
 #foto {
   padding-left: 80px;
   padding-top: 10px;
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(206, 206, 206);
   border: #093f15 2px solid;
   border-radius: 10px;
 
   width: 200px;
   height: 40px;
 
-  color: #ffffff;
+  color: #000000;
   font-size: large;
 
   -webkit-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
@@ -377,7 +390,7 @@ input[type="file"] {
 }
 
 .post {
-  background-color: #1c1c1c;
+  background-color: #bcbaba;
   border-radius: 8px;
   padding: 20px;
   color: #fff;
@@ -443,18 +456,19 @@ input[type="file"] {
 .divisao1 {
   display: flex;
   flex-direction: column;
-  background-color: #191919;
-  width: 450px;
-  height: 650px;
+  background-color: #bcbaba;
 
+  border: #09581a 3px solid;
+  width: 90%; /* Ajuste conforme necessário */
+  max-width: 400px; /* Defina um tamanho máximo para evitar que a div se estenda demais */
+  height: auto; /* Em vez de uma altura fixa, use 'auto' para que a altura seja determinada pelo conteúdo */
   margin-bottom: 20px;
   margin-top: 2%;
   margin-left: 3px;
   padding-bottom: 40px;
-
   border-radius: 12px;
-  /* border: solid 4px #093f15; */
 }
+
 
 .card1 {
   display: flex;
@@ -464,7 +478,7 @@ input[type="file"] {
 }
 
 .h1Titulo {
-  color: #ffffff;
+  color: #000000;
   font-size: 24px;
   font-weight: 600;
   padding-left: 30px;
@@ -480,20 +494,33 @@ input[type="file"] {
 }
 
 
+/* .foto_postagem img {
+  width: 100%;
+  height: auto; /* Para manter a proporção da imagem */
+  /* border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+} */ 
+
+
 .foto_postagem img {
-  width: 90%;
+  width: 99%;
   /* A imagem ocupa 90% da largura do contêiner */
   height: 400px;
   align-self: center;
   /* Define a altura fixa da imagem */
   object-fit: cover;
+
+  border: 3px solid #093f15;
+
   /* Garante que a imagem se ajuste ao contêiner sem distorção */
   /* align-self: center; */
   /* border-radius: 12px; */
   /* border: solid 2px #E2aa44; */
   /* margin-top: -5px; */
-  margin-left: 22px;
+  margin-left: px ;
 }
+
 
 #curtir {
   display: flex;
@@ -526,29 +553,49 @@ input[type="file"] {
 }
 
 .texto1 p {
-  align-self: center;
-  color: #fff;
+  color: #000000;
   font-size: medium;
   text-align: start;
-  margin-left: 15px;
-
+  margin: 10px 15px; /* Adicione margens para espaçamento interno */
 }
-
-
 
 
 #botao {
   display: flex;
   justify-content: space-around;
+  margin-top: 10px;
 }
 
 #botao button {
-  width: 100px;
-  height: 30px;
+  flex: 3;
+  margin: 5px;
   background-color: #E2aa44;
   font-size: medium;
   border-radius: 5px;
   border: none;
+  width: 00px;
+  height: 40px;
+transition: transform 1s;
+transform: translateX(0) scale(0.8);
+}
+
+#botao button:hover,
+#botao button:focus {
+background-color: #9f7322;
+border: #0d601f00 2px solid;
+border-radius: 10px;
+
+width: 200px;
+height: 40px;
+
+color: #eeeeee;
+font-size: large;
+/* 
+-webkit-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
+-moz-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
+box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75); */
+
+transform: translateX(10px) scale(0.9);
 }
 
 /* #btns button {
@@ -581,7 +628,12 @@ span {
 }
 
 h3 {
-  color: #9f7322;
+  color: #0e6120;
+  padding-right: 10px;
+  font-size: 22px;
+}
+h4 {
+  color: #a3701c;
   padding-right: 10px;
   font-size: 22px;
 }

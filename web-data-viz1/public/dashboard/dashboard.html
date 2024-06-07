@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./../css/dashboard.css">
     <!-- <link rel="stylesheet" href="./../css/dashboards.css"> -->
-    <link rel="stylesheet" href="./../css/estilo.css" />
+    <!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -109,6 +109,25 @@
 
 </div>
 
+
+<div class="footer">
+    <div class="container">
+      
+      <div class="outros">
+      <a href="index.html">Home</a>  
+      <a href="sobreNos.html">Sobre Nós</a>  
+      <a href="estilos.html">Estilos</a>  
+      <a href="mailto:kevellyoliveira2@gmail.com?subject=Quero falar sobre o FavStyyle&body=Olá, tudo bem?">Contate-nos</a>
+
+      <!-- <a href="mailto:kevellyoliveira2@gmail.com"></a> -->
+      </div>
+
+      <div class="outros">
+      <h4> &copy; 2024</h4>
+      <span class="version">v1.0.0</span>
+      </div>
+    </div>
+  </div>
 
 </body>
 
@@ -266,7 +285,7 @@ function buscarPeloId(idUsuario) {
                 data: [],
                 fill: false,
                 borderColor: 'rgb(225, 225, 255)',
-                backgroundColor: 'rgb(225, 225, 255)',
+                backgroundColor: '#fff',
                 borderWidth: 1,
                 tension: 0.1
             }
@@ -307,9 +326,9 @@ function buscarPeloId(idUsuario) {
     data: dados,
     options: {
         plugins: {
-            legend: {
-                display: false // Desativa a exibição da legenda
-            }
+            // legend: {
+            //     display: false // Desativa a exibição da legenda
+            // }
         },
     scales: {
             x: {
@@ -324,7 +343,9 @@ function buscarPeloId(idUsuario) {
                 ticks: {
                     font: {
                         size: 20 // Ajuste o tamanho da fonte dos ticks no eixo Y
-                    }
+                    },
+                    color: '#fff',
+
                 }
             }
         },
