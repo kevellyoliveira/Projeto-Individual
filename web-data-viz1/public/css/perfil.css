@@ -65,14 +65,7 @@ body {
     color: #e3b062;
 }
 
-.navbar1 {
-    width: 170px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    list-style: none;
-    color: #e3b062;
-}
+
 
 .header h1 {
     margin: 0;
@@ -103,13 +96,27 @@ body {
     align-items: center;
 }
 
-.navbar1 img {
-        background-color: rgb(6, 85, 58);
+.navbar1 {
+    width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    color: #e3b062;
+  
+  }
+  
+  .navbar1 img {
+    background-image: url('../img/usuario.png');
+    background-size: cover;
+    background-position: center;
     width: 50px;
     height: 50px;
-    border: 2px solid #fff;
-    border-radius: 100px;
-}
+    width: 50px;
+    border: 2px solid #093f15;
+  
+    border-radius: 100%;
+  }
 
 .btn-logout {
     color: #0c7422;
@@ -138,7 +145,7 @@ body {
     align-items: center;
     flex-direction: column;
 
-    background-color: #131212e1;
+    background-color: #141414e1;
     margin-top: 50px;
 
     transition: transform 1s;
@@ -195,14 +202,17 @@ box-shadow: 1px 1px 56px 13px rgba(0,0,0,0.75);
 
 
 #uf img {
+    background-image: url('../img/usuario.png');
+    background-size: cover;
+    background-position: center;
+
     border: #0f100f 3px solid;
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color: #ddd; /* Cor de fundo padrão para quando não houver imagem */
+    background-color: #0c7422   ; /* Cor de fundo padrão para quando não houver imagem */
     object-fit: cover; /* Garante que a imagem preencha o contêiner */
 }
-
 
 /* #uf img {
     border: #0f100f 3px solid;

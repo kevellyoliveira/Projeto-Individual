@@ -135,7 +135,7 @@
                 res.json().then(json => {
                     const usuario = json[0];
                     container.innerHTML = `
-    <img src='../assets/fotos/${usuario.foto}' alt="imagem de usuario">`
+    <img src='../assets/fotos/${usuario.foto}' >`
                 })
             })
             .catch(err => {
@@ -269,7 +269,7 @@
                         h1Titulo.innerHTML = publicacao.titulo;
 
                         var h2NomeUsuario = document.createElement("h2");
-                        h2NomeUsuario.innerHTML = publicacao.nome;
+                        h2NomeUsuario.innerHTML = `@${publicacao.nome}`;
 
                         var imgPostagem = document.createElement("img");
                         imgPostagem.src = `../assets/fotos/${publicacao.ftPostagem}`;

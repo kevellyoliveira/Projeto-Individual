@@ -17,7 +17,7 @@ body {
 
 .header {
     height: var(--tamanho-header);
-    border-bottom: 4px solid #093f15;
+    border-bottom: 4px solid #faebd7;
 }
 
 .header .container {

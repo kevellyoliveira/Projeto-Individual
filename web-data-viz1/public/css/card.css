@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(31, 31, 31);
+  background-color:  #2b2b2b;
 }
 
 .container {
@@ -17,7 +17,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 4px solid #093f15;
+  border-bottom: 4px solid #faebd7;
 }
 
 .header .container {
@@ -25,6 +25,7 @@ body {
   align-items: center;
   height: 100%;
 }
+
 .header a {
   text-decoration: none;
   color: #e3b062;
@@ -66,12 +67,25 @@ body {
 }
 
 .navbar1 {
-  width: 170px;
+  width: 180px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   list-style: none;
   color: #e3b062;
+
+}
+
+.navbar1 img {
+  background-image: url('../img/usuario.png');
+  background-size: cover;
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  width: 50px;
+  border: 2px solid #093f15;
+
+  border-radius: 100%;
 }
 
 .header h1 {
@@ -103,13 +117,7 @@ body {
   align-items: center;
 }
 
-.navbar1 img {
-  background-color: aquamarine;
-  width: 50px;
-  height: 50px;
-  border: 2px solid #fff;
-  border-radius: 100px;
-}
+
 
 .btn-logout {
   color: #0c7422;
@@ -127,7 +135,7 @@ body {
 .divisao {
   display: flex;
   flex-direction: column;
-  background-color: #bcbaba;
+  background-color: #faebd7;
   width: 450px;
   height: auto;
 
@@ -136,9 +144,10 @@ body {
   margin-left: 3px;
   padding-bottom: 20px;
 
-  position: relative; /* Permite posicionar o coração no final da divisão */
+  position: relative;
+  /* Permite posicionar o coração no final da divisão */
 
-  border: #09631d 4px solid;
+  border: #E2aa44 4px solid;
 
   border-radius: 12px;
   /* border: solid 4px #093f15; */
@@ -198,7 +207,11 @@ p {
 }
 
 .img-usuario {
-  border-radius: 50%;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/17/17004.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  border: #000000 2px solid;
   /* Exemplo de estilo: imagem do usuário em formato circular */
   width: 50px;
   /* Define a largura da imagem do usuário */
@@ -208,34 +221,68 @@ p {
 }
 
 .img-postagem {
-  width: 100%;       /* A imagem ocupa 90% da largura do contêiner */
-  height: 400px;   
-  align-self: center; /* Define a altura fixa da imagem */
-  border: #09631d 2px solid;
-  object-fit: cover; /* Garante que a imagem se ajuste ao contêiner sem distorção */
+  width: 100%;
+  /* A imagem ocupa 90% da largura do contêiner */
+  height: 400px;
+  align-self: center;
+  /* Define a altura fixa da imagem */
+  border-top: #09631d 2px solid;
+  border-bottom: #09631d 2px solid;
+  object-fit: cover;
+  /* background-color: #093f15; */
+  /* Garante que a imagem se ajuste ao contêiner sem distorção */
 }
 
 .curtir-container {
   position: absolute;
-  bottom: 15px;      /* Ajuste conforme necessário */
-  right: 20px;       /* Ajuste conforme necessário */
+  width: 50px;
+  bottom: 8px;
+  /* Ajuste conforme necessário */
+  right: 20px;
+  /* Ajuste conforme necessário */
   align-self: start;
 }
 
-/* input[type="checkbox"] {
-  position: absolute;
+/* Estilo da checkbox quando não estiver marcada */
+input[type="checkbox"]:not(:checked):before {
+  background-image: url('../img/cori-ncurtido.png');
+  background-size: cover;
+  background-position: center;
+  content: '';
   display: flex;
-  justify-content: start;
-  padding-left: 30px;
-  
-} */
+  margin-top: 11px;
+  width: 40px;
+  height: 35px;
+  background-color: #faebd7; 
+}
+
+/* Estilo da checkbox quando estiver marcada */
+input[type="checkbox"]:checked:after {
+  background-image: url('../img/cori-scurtido.png');
+  background-size: cover;
+  background-position: center;
+  content: '';
+  display: flex;
+  margin-top: 10px;
+  width: 40px;
+  height: 35px;
+  background-color: #faebd7; 
+  margin-top: 10px;
+
+}
+
+/* Oculta o :before quando o :after estiver ativo */
+input[type="checkbox"]:checked:before {
+  display: none;
+}
 
 
 h3 {
   /* margin-top: -15px;   */
   color: #816334;
   /* font-size: 26px; */
-} 
+}
+
 /*
 #curtir {
   display: flex;
@@ -256,19 +303,25 @@ h3 {
 #curtir {
   display: flex;
   justify-content: start;
-  flex-direction:  row;
-    padding-top: 60px;
+  flex-direction: row;
+  padding-top: 60px;
 
- 
+
 }
 
-#curtir_icon {
+/* #curtir_icon {
   font-size: 34px;
   color: #fff;
   cursor: pointer;
-  /* padding-top: 60px; */
 }
 
 #curtir_icon.curtido {
   color: #E2aa44;
+} */
+
+/* .fas.fa-heart {
+  color: red;
 }
+.far.fa-heart {
+  color: gray;
+} */
