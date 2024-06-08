@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(31, 31, 31);
+  /* background-color: ; */
 }
 
 .container1 {
@@ -25,7 +25,6 @@ body {
   align-items: center;
   height: 100%;
 }
-
 .header a {
   text-decoration: none;
   color: #e3b062;
@@ -35,20 +34,28 @@ body {
 
 .header a:hover {
   font-weight: bold;
-  transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+  transform: translateY(-50px);
+  color: #0a6f20;
+
+  /* Ajuste este valor conforme necessário */
 }
 
 .agora {
   font-weight: 800;
   transition: transform 0.5s ease-in-out;
+  color: #0a6f20;
+
 }
 
 .agora:hover {
   font-weight: 800;
   transition: transform 0.5s ease-in-out;
-  transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+  transform: translateY(-5px);
+  /* Ajuste este valor conforme necessário */
+  color: #0a6f20;
 
 }
+
 .navbar {
   width: 340px;
   display: flex;
@@ -194,6 +201,23 @@ body {
 
 }
 
+.fundo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: auto;
+
+  background-color: #faebd7;
+  border-bottom-left-radius: 200px;
+  border-top-right-radius: 200px;
+
+  padding-bottom: 50px;
+  margin-top: 5px;
+}
+
 .cont .ot {
   color: #d1933f;
   /* font-family: "Great Vibes", cursive; */
@@ -230,7 +254,7 @@ body {
 
 .div-form label {
   font-size: larger;
-  color: #fff;
+  color: #000000;
 }
 
 .div-form input {
@@ -287,7 +311,7 @@ input[type="file"] {
 #foto {
   padding-left: 80px;
   padding-top: 10px;
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(254, 254, 254);
   border: #093f15 2px solid;
   border-radius: 10px;
 
@@ -297,9 +321,9 @@ input[type="file"] {
   color: #000000;
   font-size: large;
 
-  -webkit-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
-  box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 2px 22px 9px rgba(0, 0, 0, 0.75); */
 
   transition: transform 1s;
   transform: translateX(0) scale(1.0);

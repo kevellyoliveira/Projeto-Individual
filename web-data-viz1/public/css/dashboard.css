@@ -35,21 +35,27 @@ body {
   
   .header a:hover {
     font-weight: bold;
-    transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+    transform: translateY(-50px);
+    color: #0a6f20;
+  
+    /* Ajuste este valor conforme necessário */
   }
   
   .agora {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
+    color: #0a6f20;
+  
   }
   
   .agora:hover {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
-    transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+    transform: translateY(-5px);
+    /* Ajuste este valor conforme necessário */
+    color: #0a6f20;
   
   }
-
 .navbar {
     width: 340px;
     display: flex;

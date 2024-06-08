@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(31, 31, 31);
+  background-color: #2b2b2b;
 }
 
 .container {
@@ -17,7 +17,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 4px solid #093f15;
+  border-bottom: 4px solid #faebd7;
 }
 
 .header .container {
@@ -35,18 +35,25 @@ body {
 
 .header a:hover {
   font-weight: bold;
-  transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+  transform: translateY(-50px);
+  color: #0a6f20;
+
+  /* Ajuste este valor conforme necessário */
 }
 
 .agora {
   font-weight: 800;
   transition: transform 0.5s ease-in-out;
+  color: #0a6f20;
+
 }
 
 .agora:hover {
   font-weight: 800;
   transition: transform 0.5s ease-in-out;
-  transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+  transform: translateY(-5px);
+  /* Ajuste este valor conforme necessário */
+  color: #0a6f20;
 
 }
 
@@ -201,16 +208,25 @@ body {
 }
 
 .title h1 {
-  color: #E2aa44;
+  color: #faebd7;
   font-size: 500%;
   font-family: "Poppins", sans-serif;
   transition: transform 1s;
   transform: translateX(0) scale(1.0);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
 }
 
 .title h1:hover,
 .title h1:focus {
-  color: #ffffff;
+  color: #E2aa44;
   font-size: 500%;
   font-family: "Poppins", sans-serif;
   transform: translateX(10px) scale(1.2);
@@ -220,7 +236,8 @@ body {
 
 /* FOOTER  */
 .footer {
-  background-color: #093f15;
+  background-color: #0a6f20;
+  margin-top: 5px;
   height: 200px;
   color: #fff;
   display: flex;
@@ -233,14 +250,15 @@ body {
 }
 
 .footer .container {
-   display: flex;
+  display: flex;
   justify-content: center;
   text-align: center;
   flex-direction: column;
 
 }
+
 .footer .container .outros {
-   display: flex;
+  display: flex;
   justify-content: center;
   text-align: center;
   /* flex-direction: column; */
@@ -249,22 +267,22 @@ body {
 }
 
 .footer .container a {
-   margin-left: 50px;
-   padding-top: 40px;
-   font-weight: 600;
-   font-size: medium;
-   color: unset;
-   text-decoration: none;
+  margin-left: 50px;
+  padding-top: 40px;
+  font-weight: 600;
+  font-size: medium;
+  color: unset;
+  text-decoration: none;
 }
 
 .footer .container h4 {
-   margin-left: 50px;
+  margin-left: 50px;
 
 }
 
 .footer .container .version {
   font-size: 12px;
-  
+
 }
 
 /* CORPO  */
@@ -313,7 +331,6 @@ body {
   width: 99.90%;
   display: flex;
   justify-content: space-around;
-  border: #E2aa44 1px solid;
 }
 
 .box-img {
@@ -336,7 +353,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e5e5e5;
+  background-color: #faebd7;
+  border-top-right-radius: 200px;
+
 }
 
 .box-img2 img {
@@ -355,6 +374,7 @@ body {
   padding-top: 70px;
   padding-bottom: 70px;
 }
+
 .box-text2 {
   width: 100%;
   /* background-color: rgb(108, 230, 28); */
@@ -363,10 +383,28 @@ body {
   align-items: center;
   flex-direction: column;
 
-  background-color: #e5e5e5;
+  background-color: #faebd7;
 
   padding-top: 70px;
   padding-bottom: 70px;
+  border-bottom-left-radius: 200px;
+}
+
+.box-text23 {
+  width: 100%;
+  /* background-color: rgb(108, 230, 28); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #faebd7;
+
+  border-top-left-radius: 400px;
+  border-bottom-right-radius: 400px;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .box-text p {
@@ -403,6 +441,26 @@ body {
   text-align: center;
   width: 80%;
   font-size: large;
+  color: #000000;
+  transform: translateX(10px) scale(1.2);
+
+}
+
+.box-text23 p {
+  text-align: center;
+  width: 90%;
+  font-size: 20px;
+  color: #000000;
+  font-weight: 400;
+  transition: transform 1s;
+  transform: translateX(0) scale(1.0);
+}
+
+.box-text23 p:hover,
+.box-text23 p:focus {
+  text-align: center;
+  width: 90%;
+  font-size: larger;
   color: #000000;
   transform: translateX(10px) scale(1.2);
 

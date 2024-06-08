@@ -61,7 +61,7 @@ function cadastrar(req, res) {
     var email = req.body.email;
     var senha = req.body.senha;
     var confirmacao = req.body.confirmacaoSenha;
-    var empresaId = req.body.empresa;
+    var empresaId = req.body.empresaId;
 
     // const imagem = req.file.filename;
     const foto = req.file ? req.file.filename : null;
@@ -75,7 +75,7 @@ function cadastrar(req, res) {
         res.status(400).send("Seu nome está undefined!");
     } else if (dtNasc == undefined && dtNasc.length != 8) {
         res.status(400).send("Seu dtNasc está undefined!");
-    } else if (email == undefined && (email == termina_com_com && email == indice_arroba)) {
+    } else if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined && senha == confirmacao) {
         res.status(400).send("Sua senha está undefined!");

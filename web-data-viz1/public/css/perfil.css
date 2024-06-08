@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(31, 31, 31);
+    background-color: #2b2b2b;
 }
 
 .container {
@@ -17,7 +17,7 @@ body {
 
 .header {
     height: var(--tamanho-header);
-    border-bottom: 4px solid #093f15;
+    border-bottom: 4px solid #faebd7;
 }
 
 .header .container {
@@ -25,7 +25,6 @@ body {
     align-items: center;
     height: 100%;
 }
-
 .header a {
     text-decoration: none;
     color: #e3b062;
@@ -35,18 +34,25 @@ body {
   
   .header a:hover {
     font-weight: bold;
-    transform: translateY(-50px); /* Ajuste este valor conforme necessário */
+    transform: translateY(-50px);
+    color: #0a6f20;
+  
+    /* Ajuste este valor conforme necessário */
   }
   
   .agora {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
+    color: #0a6f20;
+  
   }
   
   .agora:hover {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
-    transform: translateY(-5px); /* Ajuste este valor conforme necessário */
+    transform: translateY(-5px);
+    /* Ajuste este valor conforme necessário */
+    color: #0a6f20;
   
   }
 
@@ -132,7 +138,7 @@ body {
     align-items: center;
     flex-direction: column;
 
-    background-color: rgb(19, 19, 19);
+    background-color: #131212e1;
     margin-top: 50px;
 
     transition: transform 1s;
@@ -153,7 +159,7 @@ box-shadow: 1px 1px 56px 13px rgba(0,0,0,0.75);
     align-items: center;
     flex-direction: column;
 
-    background-color: #00000050;
+    background-color: #00000077;
     margin-top: 50px;
 
     transform: translateX(10px) scale(1.0);
@@ -174,7 +180,7 @@ box-shadow: 1px 1px 56px 13px rgba(0,0,0,0.75);
     font-size: 24px;
     margin-top: -20px;
     font-weight: 300;
-    color: #5a5a5a;
+    color: #0c7422;
 }
 
 #uf {
