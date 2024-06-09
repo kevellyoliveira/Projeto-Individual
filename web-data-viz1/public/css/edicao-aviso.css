@@ -220,7 +220,7 @@ body {
 
 .cont .ot {
   color: #d1933f;
-  font-family: "Great Vibes", cursive;
+  /* font-family: "Great Vibes", cursive; */
   font-size: 50px;
   margin-top: 50px;
   /* animation: expandirContrair 2s infinite;   */
@@ -352,8 +352,6 @@ input[type="file"] {
 }
 
 button {
-  /* padding-left: 80px;
-  padding-top: 10px; */
 
   background-color: #e7a833;
   border: #0d601f00 2px solid;

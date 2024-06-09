@@ -26,41 +26,37 @@ body {
     height: 100%;
 }
 
-/* #container{
-    position: absolute;
-    top: 0;
-    background-color: #ffffff;
-    width: 100px;
-} */
-
 .header a {
     text-decoration: none;
     color: #e3b062;
     font-size: larger;
     transition: transform 0.5s ease-in-out;
-}
-
-/* .header a:hover {
+  }
+  
+  .header a:hover {
     font-weight: bold;
     transform: translateY(-50px);
     color: #0a6f20;
-    } */
-
-.agora {
+  
+    /* Ajuste este valor conforme necessário */
+  }
+  
+  .agora {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
     color: #0a6f20;
-
-}
-
-.agora:hover {
+  
+  }
+  
+  .agora:hover {
     font-weight: 800;
     transition: transform 0.5s ease-in-out;
     transform: translateY(-5px);
     /* Ajuste este valor conforme necessário */
     color: #0a6f20;
+  
+  }
 
-}
 
 .navbar {
     width: 340px;

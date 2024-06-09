@@ -10,7 +10,7 @@
 
 
     <link rel="stylesheet" href="./../css/edicao-aviso.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
+    <!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
     <script src="../js/sessao.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,7 +19,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm()" style="background-color: rgb(31, 31, 31);">
+<body onload="validarSessao(), buscarPeloId(), listarInfosDeUm(), carregarDadosEdicao()" style="background-color: rgb(31, 31, 31);">
     <!-- <body onload="validarSessao()"> -->
 
     <div class="janela">
@@ -94,7 +94,7 @@
 
         <div class="avisos">
             <div class="cont">
-                <h1 class="ot">Editar um aviso</h1>
+                <h1 class="ot">Editar uma Postagem</h1>
                 <div class="div-form">
                      <label>
                             Título:
@@ -157,16 +157,20 @@
         console.log("Criar função de trazer informações de post escolhido");
     }
 
+
+    function carregarDadosEdicao() {
+            const titulo = sessionStorage.TITULO_POSTAGEM;
+            const descricao = sessionStorage.DESCRICAO_POSTAGEM;
+
+            document.getElementById('titulo').value = titulo;
+            document.getElementById('textarea_descricao').value = descricao;
+        }
+
+
     
     function editar(idPostagem) {
         var idUsuario = sessionStorage.ID_USUARIO;
         var idPostagem = sessionStorage.ID_POSTAGEM;
-        // var titulo = sessionStorage.TITULO; 
-        
-        // titulo.value = `${titulo}`;
-        // descricao.value = `${descricao}`;
-    
-        // var descricao = sessionStorage.DESCRICAO; 
 
         var novaDescricao = document.getElementById("textarea_descricao").value;
         var novoTitulo = document.getElementById("titulo").value;

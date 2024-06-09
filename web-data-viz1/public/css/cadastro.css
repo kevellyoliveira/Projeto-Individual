@@ -260,3 +260,23 @@ input[type="file"] {
   /* transition: transform 1s;
   transform: translateX(0) scale(1.0); */
 }
+
+#cardErro {
+  background-color: #faebd7;
+  border: 5px solid #d6a907;
+  font-weight: bold;
+  border-radius: 4px;
+  /* margin: auto; */
+  padding-top: 5px;
+  padding-left: 7px;
+  position: absolute;
+  left: 700px;
+  top: -250px;
+
+  width: 200px;
+  height: 70px;
+}
+
+.mensagem_erro{
+  font-weight: 400;
+}
