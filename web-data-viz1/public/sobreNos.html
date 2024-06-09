@@ -60,7 +60,7 @@
         </li>
     
         <li>
-          <a href="estilos.html">Estilos</a>
+          <a href="estilo.html">Estilos</a>
         </li>
       </ul>
 
@@ -75,47 +75,8 @@
     </div>
   </div>
 
-
-  <!-- <div class="slider">
-    <div class="slides">
-      <input type="radio" name="radio-btn" id="radio1">
-      <input type="radio" name="radio-btn" id="radio2">
-      <input type="radio" name="radio-btn" id="radio3">
-      <input type="radio" name="radio-btn" id="radio4">
-
-      <div class="slide first">
-        <img src="img/imagem1.png" alt="img_carrousel" id="img-slide1">
-      </div>
-      <div class="slide">
-        <img src="img/imagem2.png" alt="img_carrousel">
-      </div>
-      <div class="slide">
-        <img src="img/imagem3.png" alt="img_carrousel">
-      </div>
-      <div class="slide">
-        <img src="img/imagem4.png" alt="img_carrousel">
-      </div>
-
-    </div>
-    <div class="title">
-      <h1>Moda que Nasce na <span style="  font-family:Great Vibes; font-size: 120%; ">Periferia</span></h1>
-    </div>
-
-    <div class="manual-navigation">
-
-      <label for="radio1" class="manual-btn" id="btn-radio1"></label>
-      <label for="radio2" class="manual-btn" id="btn-radio2"></label>
-      <label for="radio3" class="manual-btn" id="btn-radio3"></label>
-      <label for="radio4" class="manual-btn" id="btn-radio4"></label>
-    </div>
-  </div> 
-  <br><br> -->
-
-
   <div class="social">
 
-    <!-- <div class="container"> -->
-    <!-- sobre o projeto -->
 
     <div class="box-text">
       <h2>Projeto Estudantil</h2>
@@ -140,51 +101,48 @@
     </div>
 
 
-    <br><br> <br><br>
-
     <!-- direito onu -->
     <div class="boxes">
       <div class="box-text1">
         <h2>Objetivos | ONU</h2>
-        <p><span style="color: #0a6f20; font-weight: 700;">ODS 8. </span> Trabalho Decente e Crescimento Econômico:
+        <p><span style="color: rgb(10, 145, 44); font-weight: 700;">ODS 8. </span> Trabalho Decente e Crescimento
+          Econômico:
           Ao reconhecer e valorizar a influência das comunidades
           negras e periféricas na moda, o projeto pode contribuir para o crescimento econômico inclusivo, criando
           oportunidades de emprego e empreendedorismo nessas comunidades.
         </p>
-        <p> <span style="color: #0a6f20; font-weight: 700;">ODS 10. </span>Redução das Desigualdades: Promover a
+        <p> <span style="color: rgb(10, 145, 44); font-weight: 700;">ODS 10. </span>Redução das Desigualdades:
+          Promover
+          a
           diversidade e inclusão na indústria da moda pode ajudar a
           reduzir as desigualdades sociais e econômicas, garantindo que pessoas de diferentes origens e comunidades
           tenham oportunidades iguais de participar e se destacar na indústria.
         </p>
-        <p> <span style="color: #0a6f20; font-weight: 700;">ODS 11. </span> Cidades e Comunidades Sustentáveis: Ao
+        <p> <span style="color: rgb(10, 145, 44); font-weight: 700;">ODS 11. </span> Cidades e Comunidades
+          Sustentáveis:
+          Ao
           destacar a influência das comunidades periféricas na moda, o
           projeto pode contribuir para o desenvolvimento de comunidades sustentáveis, promovendo a valorização da
           cultura local e o empoderamento das comunidades marginalizadas.
         </p>
       </div>
-      <div class="box-img1">
-        <img style="width: 70%;" src="img/onu.png">
+
+      <div class="box-img2">
+        <div class="slides2">
+
+          <div class="slide2 first">
+            <img id="foto" src="img/ods.png" alt="">
+
+          </div>
+        </div>
+
       </div>
+
     </div>
 
   </div>
-  <!-- <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-        </div> -->
-  <!-- </div>
-  </div> -->
-  <br><br> <br><br>
+  
+  <br><br><br>
   <div class="box-text">
     <h2>Agradecimentos Especiais</h2>
     <!-- <img style="width: 12%; border: 4px solid #4d044a ;" src="img/foto.jpeg"> -->
@@ -197,7 +155,8 @@
       desafios.
     </p>
   </div>
-  <br><br> <br><br>
+  <br><br><br>
+
 
   <div class="footer">
     <div class="container">
@@ -209,29 +168,22 @@
 
 </html>
 
-<!-- <script>
+<script>
 
-  var count = 1
-  document.getElementById("radio1").checked = true
+img = ["img/ods.png",
+    "img/ODS_08.png",
+    "img/ODS_10.png",
+    "img/ODS_11.png"]
 
-  setInterval(function () {
-    nextImage()
-  }, 4000)
+  // Mantém o índice da imagem atual. 
+  let indice_img = 0;
 
-  document.getElementById("btn-radio1").style.backgroundColor = "#FFFFFF"
-
-  function nextImage() {
-    for (let i = 1; i <= 4; i++) {
-      document.getElementById("btn-radio" + i).style.backgroundColor = "";
-
-    }
-    count++;
-    console.log("i = " + count);
-    if (count > 4) {
-      count = 1;
-    }
-    document.getElementById("radio" + count).checked = true
-    document.getElementById("btn-radio" + count).style.backgroundColor = "#FFFFFF"
+  function nextImg() {
+    const imgElement = document.getElementById('foto');
+    indice_img = (indice_img + 1) % img.length;
+    imgElement.src = img[indice_img];
   }
 
-</script> -->
+  setInterval(nextImg, 2000);
+
+</script>

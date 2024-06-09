@@ -223,6 +223,7 @@ body {
 
 .box-text h2:hover,
 .box-text h2:focus {
+
   color: #E2aa44;
   font-size: 250%;
   font-family: "Poppins", sans-serif;
@@ -264,6 +265,11 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  margin-bottom: 50px;
+  margin-top: 20px;
+
+
 }
 
 .box-text p {
@@ -366,4 +372,21 @@ body {
   color: #000000;
   padding-top: 10px;
   transform: translateX(10px) scale(1.2);
+}
+
+.box-img2 {
+  width: 100%;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #faebd7;
+  border-bottom-right-radius: 200px;
+
+}
+
+.box-img2 img {
+  width: 400px;
+  height: 500px;
+
 }
