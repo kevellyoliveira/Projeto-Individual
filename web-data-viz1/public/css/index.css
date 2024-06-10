@@ -362,6 +362,7 @@ body {
 .box-img img {
   width: 500px;
   height: 500px;
+  margin-left: 10px;
 }
 
 .box-img2 {
@@ -499,7 +500,7 @@ body {
 
 .box-text23 p {
   text-align: center;
-  width: 90%;
+  width: 80%;
   font-size: 20px;
   color: #000000;
   font-weight: 400;
@@ -510,7 +511,7 @@ body {
 .box-text23 p:hover,
 .box-text23 p:focus {
   text-align: center;
-  width: 90%;
+  width: 80%;
   font-size: larger;
   color: #000000;
   transform: translateX(10px) scale(1.2);

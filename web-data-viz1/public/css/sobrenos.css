@@ -190,19 +190,52 @@ body {
 /* FOOTER  */
 .footer {
   background-color: #0a6f20;
-  height: 150px;
+  margin-top: 5px;
+  height: 200px;
   color: #fff;
   display: flex;
   font-size: 15px;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
 }
 
 .footer .container {
+  display: flex;
   justify-content: center;
   text-align: center;
+  flex-direction: column;
+
+}
+
+.footer .container .outros {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* flex-direction: column; */
+  margin-top: 20px;
+
+}
+
+.footer .container a {
+  margin-left: 50px;
+  padding-top: 40px;
+  font-weight: 600;
+  font-size: medium;
+  color: unset;
+  text-decoration: none;
+}
+
+.footer .container h4 {
+  margin-left: 50px;
+
 }
 
 .footer .container .version {
   font-size: 12px;
+
 }
 
 /* CORPO  */

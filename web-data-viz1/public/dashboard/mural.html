@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>FavStyle | Mural de Postagem</title>
 
     <link rel="stylesheet" href="./../css/mural.css">
     <!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
@@ -136,7 +136,7 @@
                         <div id="feed_container" class="feed-container">
 
                             <!-- <div id="curtir"> -->
-                            <h3 id="curtidasQuantidade">qtd</h3>
+                            <h3 id="curtidasQuantidade"></h3>
                             <!-- <i id="curtir_icon" class="far fa-heart" onclick="curtirCori()"></i> -->
                         </div>
                     </div>
@@ -255,7 +255,7 @@
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
                     var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    mensagem.innerHTML = "Você não fez nenhuma postagem ainda : ("
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }

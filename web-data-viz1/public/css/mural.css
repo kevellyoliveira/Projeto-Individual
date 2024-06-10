@@ -542,6 +542,25 @@ input[type="file"] {
   /* Define a altura fixa da imagem */
   object-fit: cover;
 
+  /* border-top: 3px solid #093f15;
+  border-bottom: 3px solid #093f15; */
+
+  /* Garante que a imagem se ajuste ao contêiner sem distorção */
+  /* align-self: center; */
+  /* border-radius: 12px; */
+  /* border: solid 2px #E2aa44; */
+  /* margin-top: -5px; */
+  /* margin-left: px ; */
+}
+
+.foto_postagem  {
+  width: 100%;
+  /* A imagem ocupa 90% da largura do contêiner */
+  height: 400px;
+  align-self: center;
+  /* Define a altura fixa da imagem */
+  object-fit: cover;
+
   border-top: 3px solid #093f15;
   border-bottom: 3px solid #093f15;
 
@@ -656,9 +675,12 @@ transform: translateX(10px) scale(0.9);
 } */
 
 span {
-  color: #fff;
+  color: #e7a833;
   font-size: larger;
-}
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 70px;
+margin-left: -80%;}
 
 h3 {
   color: #0e6120;

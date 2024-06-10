@@ -101,7 +101,7 @@
     </div> -->
 
     <div class="cards" id="cardAquarios">
-        <div class="divisao">
+        <!-- <div class="divisao">
             <div class="card">
                 <img src="fotoUsuario" alt="">
                 <h1>titulo</h1>
@@ -117,7 +117,7 @@
                 <h3 id="curtidasQuantidade">qtd</h3>
                 <i id="curtir_icon" class="far fa-heart" onclick="curtirCori()"></i>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
@@ -241,7 +241,7 @@
                 if (resposta.status == 204) {
                     var feed = document.getElementById("cardAquarios");
                     var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado.";
+                    mensagem.innerHTML = "Nenhuma postagem até o momento. Seja o primeiro :)";
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
