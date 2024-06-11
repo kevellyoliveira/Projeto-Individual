@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarUltimasMedidas() {
 
-    var instrucaoSql = ` select COUNT(fkEstilo) as soma, e.nome  from usuario
+    var instrucaoSql = ` select COUNT(fkEstilo) as soma, e.nome  from Usuario
 	right join Estilo as e
 		on fkEstilo = idEstilo
 	group by nome;`;
@@ -13,7 +13,7 @@ function buscarUltimasMedidas() {
 
 
 function buscarMedidasEmTempoReal() {
-    var instrucaoSql = `select COUNT(fkEstilo) as soma, e.nome  from usuario
+    var instrucaoSql = `select COUNT(fkEstilo) as soma, e.nome  from Usuario
 	right join Estilo as e
 		on fkEstilo = idEstilo
 	group by nome;`;

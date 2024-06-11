@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarAquariosPorEmpresa() {
   var instrucaoSql = `
-  select email, senha from usuario where email = '${email}' and senha = '${senha}';
+  select email, senha from Usuario where email = '${email}' and senha = '${senha}';
     `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -11,10 +11,10 @@ function buscarAquariosPorEmpresa() {
 
 function buscarAquarios() {
   var instrucaoSql = `
-  select fkUsuario, fkPostagem, c.qtd_curtida, u.nome, u.email, u.foto, p.titulo, p.descricao, p.foto from curtida as c 
-	join usuario as u
+  select fkUsuario, fkPostagem, c.qtd_curtida, u.nome, u.email, u.foto, p.titulo, p.descricao, p.foto from Curtida as c 
+	join Usuario as u
 		on fkUsuario = idUsuario
-	join postagem as p
+	join Postagem as p
 		on fkPostagem = idPostagem;
     `;
 
